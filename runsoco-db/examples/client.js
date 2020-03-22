@@ -8,29 +8,16 @@ async function run () {
   const { Client, User } = await db(uri, config).catch(handleFatalError)
 
   // ==== CREACION DE NUEVO CLIENTE ==========
-//   var client = {
-//     name: 'Dany',
-//     password: 'danyjulio9832',
-//     city: 'Puerto Maldonado',
-//     email: 'dany@gmail.com',
-//     cellphone: 987651378
-//   }
 
-//   const { name, password } = client
-//   const newUser = await User.createOrUpdate({ name, password }).catch(handleFatalError)
-
-//   client.user = newUser._id
-//   const newClient = await Client.createOrUpdate(client).catch(handleFatalError)
-
-    var client = {
-        name: 'Dany',
-        password: 'dany',
-        city: 'Puerto Maldonado',
-        email: 'dany@gmail.com',
-        cellphone: 957621378
-    }
-  const newClient = await Client.createOrUpdate(client).catch(handleFatalError)
-  console.log('Cliente: ', newClient)
+  //   var client = {
+  //       name: 'Dany',
+  //       password: 'dany',
+  //       city: 'Puerto Maldonado',
+  //       email: 'dany@gmail.com',
+  //       cellphone: 957621378
+  //   }
+  // const newClient = await Client.createOrUpdate(client).catch(handleFatalError)
+  // console.log('Cliente: ', newClient)
 
 
   // ======= BUSCANDO POR ID
@@ -45,6 +32,11 @@ async function run () {
   // ======= BUSCANDO POR CITY
 //   var searchByCity = await Client.findByCity('puerto maldonado').catch(handleFatalError)
 //   console.log('CITY: ', searchByCity)
+
+  // ======= BUSCANDO POR EMAIL AND PASSWORD
+  var searchByEmailAndPassword = await Client.findByEmailSelectPassword('dany@gmail.com').catch(handleFatalError)
+  console.log('EMAIL AND PASSWORD: ', searchByEmailAndPassword)
+
 }
 
 function handleFatalError (err) {

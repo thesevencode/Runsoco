@@ -46,11 +46,19 @@ module.exports = function (clientModel, UserModel) {
     }).populate('user')
   }
 
+  function findByEmailSelectPassword (email) {
+    return clientModel.findOne({
+      email
+    }).populate({ path: 'user', select: 'password'})
+
+  }
+
   return {
     createOrUpdate, // implementado
     findById, // implementado
     findByEmail, // implementado
-    findByCity // implementado
+    findByCity, // implementado
+    findByEmailSelectPassword, // implementado
 
   }
 }

@@ -115,7 +115,14 @@ Funciones :
             param: city -> String
             returns: 
                 - Objeto -> Éxito
-                - Error -> Generado por la base de datos    
+                - Error -> Generado por la base de datos
+
+    5) findByEmailSelectPassword(email)
+    
+            param: email -> String
+            returns: 
+                - Objeto -> Éxito
+                - Error -> Generado por la base de datos      
                 
 
 ####  Para mas información revisar la carpeta EXAMPLES,esta contiene ejemplos del uso de este modulo.
