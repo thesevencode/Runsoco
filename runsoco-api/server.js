@@ -5,6 +5,9 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const chalk = require('chalk')
 
+const db = require('./db')
+const routes = require('./app/routes')
+
 
 const port = process.env.PORT || 3000
 
@@ -14,7 +17,7 @@ const server = http.createServer(app)
 
 
 app.use('/public', express.static(__dirname + '/public'))
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('combined'))
 
@@ -27,6 +30,8 @@ app.use(function (req, res, next) {
 })
 
 
+routes(app)
+
 if (!module.parent) { // verificamos que el archivo ha sido requerido
     process.on('uncaughtException', handleFatalError)
     process.on('unhandledRejection', handleFatalError)
@@ -34,12 +39,16 @@ if (!module.parent) { // verificamos que el archivo ha sido requerido
     server.listen(port, () => {
         console.log(`${
             chalk.green('[runsoco-api]')
-        } server listened on port ${port}`)
+            } server listened on port ${port}`)
     })
 }
+
+
+
 module.exports = server
 
 function handleFatalError(err) { // console.error(`${chalk.red('[fatal error]')} ${err.message}`)
     console.error(err.stack)
     process.exit(1)
 }
+

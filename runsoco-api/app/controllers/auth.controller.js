@@ -36,7 +36,7 @@ module.exports = async () => {
                 message: 'La contraseña es un campo obligatorio, por favor intentalo nuevamente'
             })
         }
-        if (!body.user.terms) {
+        if (!body.terms || body.terms == 'false') {
             return res.status(400).json({
                 status: false,
                 message: 'Acepta los terminos y condiciones para poder continuar'
@@ -69,6 +69,10 @@ module.exports = async () => {
         
 
 
+    }
+
+    return {
+        signIn
     }
 
 }
