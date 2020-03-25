@@ -63,7 +63,7 @@ module.exports = async () => {
         res.status(200).json({
             status: true,
             message: 'Operacion exitosa, usuario creado',
-            user: user
+            data: user
         })
 
         
