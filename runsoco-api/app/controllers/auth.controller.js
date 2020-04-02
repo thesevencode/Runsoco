@@ -1,11 +1,11 @@
 'use strict'
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const  Token = require('../../utils/token')
 const nodemailer = require('nodemailer')
 
 const DB = require('../../db')
 
-const { auth } = require('../../config')
+const { auth, keyToken } = require('../../config')
 
 let transporter = nodemailer.createTransport(auth.GoogleAuth);
 
@@ -71,8 +71,54 @@ module.exports = async () => {
 
     }
 
+    async function login(req, res, next) {
+        let client =  req.body
+
+        let account
+        try{
+            account =  await Client.findByEmailSelectPassword(client.email)
+
+        } catch (e){
+            res.status(500).json({
+                status: false,
+                message: 'Ocurrio un problema, intentelo de nuevo mas tarde :('
+            })
+    
+            handleFatalError(e)
+        }
+
+        if(account){
+
+            if(bcrypt.compareSync(client.password, account.user.password)) {
+                const payload = account.toJSON()
+                delete payload.user.password
+                var token = Token.sign(payload, keyToken)
+                return res.status(200).json({token, status:true, data: payload })
+    
+            } 
+
+
+            return res.status(400).json({
+                    status: false,
+                    message: 'Los datos son invalidos'
+            })
+        
+
+        } else {
+            return res.status(401).json({
+                status: false,
+                message: 'La cuenta no se encuentra registrada'
+            })
+        }
+
+        
+        
+
+    }
+
     return {
-        signIn
+        signIn,
+        login
     }
 
 }

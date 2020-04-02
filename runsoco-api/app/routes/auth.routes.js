@@ -15,6 +15,7 @@ module.exports = async () => {
             res.send("hola mundo")
         })
         .post('/signIn', controller.signIn)
+        .post('/login', controller.login)
 
     return router
 }

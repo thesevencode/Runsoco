@@ -5,5 +5,6 @@ const auth = require('./auth')
 
 module.exports = {
     db,
-    auth
+    auth,
+    keyToken: 'bytecodePuerto2019'
 }
