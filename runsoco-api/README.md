@@ -32,7 +32,7 @@
 ***Ser preciso con el nombre de los datos que se tiene que enviar, tal y como muestra el ejemplo***
 
 ## Inicio de Sesión cliente
-*localhost:3000/api/auth/signIn*
+*localhost:3000/api/auth/login*
 
 **EJemplo**
 
