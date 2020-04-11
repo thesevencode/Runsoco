@@ -53,7 +53,7 @@ module.exports = async function setupClientModel (uri, config) {
     location_history: [locationSchema],
     cellphone: {
       type: Number,
-      required: true,
+      required: false,
       unique: true,
       select: true
     },
