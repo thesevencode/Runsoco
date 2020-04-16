@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const nodemailer = require('nodemailer')
 
 const DB = require('../../db')
-const  Token = require('../../utils/token')
+const  Token = require('../../utils/Token')
 
 
 const { auth, keyToken } = require('../../config')
