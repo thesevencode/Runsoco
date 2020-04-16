@@ -1,9 +1,10 @@
 'use strict'
 const bcrypt = require('bcryptjs')
-const  Token = require('../../utils/token')
 const nodemailer = require('nodemailer')
 
 const DB = require('../../db')
+const  Token = require('../../utils/token')
+
 
 const { auth, keyToken } = require('../../config')
 
