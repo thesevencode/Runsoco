@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 function sign (payload, secret) {
 
-    return jwt.sign(payload, secret, { expiresIn: '30d'})
+    return jwt.sign(payload, secret)
 }
 
 function verify (token, secret, callback) {

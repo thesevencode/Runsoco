@@ -60,5 +60,7 @@ module.exports = function (clientModel, UserModel) {
     findByCity, // implementado
     findByEmailSelectPassword, // implementado
 
+
+
   }
 }
