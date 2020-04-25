@@ -3,74 +3,16 @@ const bcrypt = require('bcryptjs')
 const nodemailer = require('nodemailer')
 
 const DB = require('../../db')
-const  Token = require('../../utils/Token')
-
-
+const  {HandleFatalError, Token} = require('../../utils')
 const { auth, keyToken } = require('../../config')
+
 
 let transporter = nodemailer.createTransport(auth.GoogleAuth);
 
 module.exports = async () => {
     const { Client } = await DB()
 
-    async function signIn(req, res, next) {
-
-        let body = req.body
-
-        let user
-
-        try {
-            user = await Client.findByEmail(body.email)
-        } catch (e) {
-            handleFatalError(e)
-        }
-
-        if (user) {
-            return res.status(400).json({
-                status: false,
-                message: 'El email que desea utilizar ya existe, por favor intente con uno diferente'
-            })
-        }
-        if (!body.password || body.password == '') {
-            return res.status(400).json({
-                status: false,
-                message: 'La contraseña es un campo obligatorio, por favor intentalo nuevamente'
-            })
-        }
-        if (!body.terms || body.terms == 'false') {
-            return res.status(400).json({
-                status: false,
-                message: 'Acepta los terminos y condiciones para poder continuar'
-            })
-        }
-
-        body.password = bcrypt.hashSync(body.password, 10)
-
-        try {
-            user = await Client.createOrUpdate(body)
-        } catch (e) {
-            handleFatalError(e)
-        }
-
-        if (!user) {
-            return res.status(500).json({
-                status: false,
-                message: 'Algo salio mal, vuelve a intentarlo'
-            })
-        }
-
-        delete user.password
-
-        res.status(200).json({
-            status: true,
-            message: 'Operacion exitosa, usuario creado',
-            data: user
-        })
-
-        
-
-
-    }
+   
 
     async function login(req, res, next) {
         let client =  req.body
@@ -85,7 +27,7 @@ module.exports = async () => {
                 message: 'Ocurrio un problema, intentelo de nuevo mas tarde :('
             })
     
-            handleFatalError(e)
+            HandleFatalError(e)
         }
 
         if(account){
@@ -118,19 +60,11 @@ module.exports = async () => {
     }
 
     return {
-        signIn,
         login
     }
 
 }
 
-
-function handleFatalError(err) {
-    console.log('ERRORR')
-    console.error(err.message)
-    console.error(err.stack)
-    process.exit(1)
-}
 
 function sendEmail(data) {
 

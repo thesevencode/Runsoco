@@ -5,8 +5,8 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const chalk = require('chalk')
 
-const db = require('./db')
 const routes = require('./app/routes')
+const { HandleFatalError } =  require('./utils')
 
 
 const port = process.env.PORT || 3000
@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('combined'))
 
+
+
 // CORS
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -32,9 +34,10 @@ app.use(function (req, res, next) {
 
 routes(app)
 
+
 if (!module.parent) { // verificamos que el archivo ha sido requerido
-    process.on('uncaughtException', handleFatalError)
-    process.on('unhandledRejection', handleFatalError)
+    process.on('uncaughtException', HandleFatalError)
+    process.on('unhandledRejection', HandleFatalError)
 
     server.listen(port, () => {
         console.log(`${
@@ -46,9 +49,4 @@ if (!module.parent) { // verificamos que el archivo ha sido requerido
 
 
 module.exports = server
-
-function handleFatalError(err) { // console.error(`${chalk.red('[fatal error]')} ${err.message}`)
-    console.error(err.stack)
-    process.exit(1)
-}
 

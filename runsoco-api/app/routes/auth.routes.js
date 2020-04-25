@@ -3,7 +3,6 @@
 const express = require('express')
 
 const { authController } = require('../controllers')()
-
 const router = express.Router()
 
 module.exports = async () => {
@@ -14,7 +13,6 @@ module.exports = async () => {
         .get('/', (req, res) => {
             res.send("hola mundo")
         })
-        .post('/signIn', controller.signIn)
         .post('/login', controller.login)
 
     return router
