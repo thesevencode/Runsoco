@@ -6,7 +6,7 @@ const APIError = require('../helper/APIError');
 
 
 const DB = require('../../db')
-const { HandleFatalError, Token } =  require('../../utils')
+const { Token, HashidsUtils } =  require('../../utils')
 const { keyToken } = require('../../config')
 
 
@@ -29,7 +29,6 @@ module.exports =  async ()=>{
             user = await Client.findByEmail(body.email)
         } catch (e) {
             //Error de la base de datos
-            HandleFatalError(e)
             const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
         }
@@ -41,6 +40,9 @@ module.exports =  async ()=>{
 
         //encriptamos la contraseña
         body.password = bcrypt.hashSync(body.password, 10)
+        const generator = new HashidsUtils(body.email)
+        body.shareCode = generator.generate()
+
         try {
             user = await Client.createOrUpdate(body)
             delete user.password
@@ -54,7 +56,6 @@ module.exports =  async ()=>{
             })
         } catch (e) {
             //ERROR de la base de datos
-            HandleFatalError(e)
             const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
         }

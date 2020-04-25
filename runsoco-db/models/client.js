@@ -36,6 +36,12 @@ module.exports = async function setupClientModel (uri, config) {
       ref: 'User',
       required:true
     },
+    shareCode: {
+      type: String,
+      required: true,
+      select: true,
+      lowercase: true
+    },
     city: {
       type: String,
       required: true,
