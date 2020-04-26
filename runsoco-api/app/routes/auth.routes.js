@@ -1,8 +1,12 @@
 'use strict'
 
 const express = require('express')
+const { validate } = require('express-validation')
+
 
 const { authController } = require('../controllers')()
+const { authValidation } = require('../validation')
+
 const router = express.Router()
 
 module.exports = async () => {
@@ -13,7 +17,8 @@ module.exports = async () => {
         .get('/', (req, res) => {
             res.send("hola mundo")
         })
-        .post('/login', controller.login)
+        .post('/login', validate(authValidation.login), controller.login)
+        .post('/facebook', validate(authValidation.facebook), controller.loginByFacebook)
 
     return router
 }

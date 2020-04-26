@@ -24,7 +24,8 @@ module.exports = function (clientModel, UserModel) {
     client.user = user._id
 
     const result = await clientModel.create(client)
-    return result.toJSON()
+    return findById(result.toJSON()._id)
+
   }
 
   function findById (_id) {

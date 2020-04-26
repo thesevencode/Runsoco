@@ -47,7 +47,7 @@ module.exports =  async ()=>{
             user = await Client.createOrUpdate(body)
             delete user.password
 
-            var token = Token.sign(user, keyToken)
+            var token = Token.sign(user.toJSON(), keyToken)
             res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa, usuario creado!',
