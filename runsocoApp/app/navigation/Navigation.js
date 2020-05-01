@@ -34,7 +34,7 @@ const Stack = createStackNavigator()
 function RestaurantsStack() {
   return (
       <Stack.Navigator  initialRouteName="Restaurantes">
-          <Stack.Screen name="Restaurantes" component={RestaurantsScreen}/>
+          <Stack.Screen name="Realizar Pédido" options={{ headerTitleAlign: 'center' }} component={RestaurantsScreen}/>
           <Stack.Screen name="Restaurante" component={RestaurantScreen} 
             // options={({ route }) => ({ title: route.params.restaurant.name })}
             options={({ route }) => ({ title: "route.params.restaurant.name" })}

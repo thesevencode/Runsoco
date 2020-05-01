@@ -25,7 +25,7 @@ function UserGuest(props){
                         top: 0,
                         height: hp(100),
                     }}/>
-                <View>
+                <View style={styles.content}>
                     <Image
                         source={require("../../assets/img/user-guest.png")}
                         style={styles.image}
@@ -61,7 +61,9 @@ function UserGuest(props){
 export default UserGuest
 
 const styles = StyleSheet.create({
-
+    content: {
+        paddingTop: hp(5)
+    },
     viewBody: {
         flex:1,
     },
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     description: {
         textAlign: "center",
         // marginBottom: 30,
-        marginTop: hp(0.2),
+        marginTop: hp(1),
         paddingLeft: 30,
         paddingRight: 30,
         color: "#EDEDED"
