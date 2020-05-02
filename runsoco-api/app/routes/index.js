@@ -2,6 +2,7 @@
 
 let authRouter = require('./auth.routes')
 let clientRouter = require('./client.routes')
+let saleRouter = require('./sale.routes')
 
 const {  ValidationError } = require('express-validation')
 
@@ -13,6 +14,7 @@ module.exports = async (app) => {
 
     app.use('/api/auth', await authRouter())
     app.use('/api/client', await clientRouter())
+    app.use('/api/sale', await saleRouter)
 
 
 

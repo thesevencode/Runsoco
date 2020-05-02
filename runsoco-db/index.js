@@ -4,8 +4,16 @@ const setupDabatase = require('./lib/db')
 const setupUserModel = require('./models/user')
 const setupClientModel = require('./models/client')
 
+const setupCurrierModel = require('./models/currier')
+const setupBusinessModel = require('./models/business')
+const setupProductModel = require('./models/product')
+const setupSaleModel = require('./models/sale')
+
+
 const setupUser = require('./lib/user')
 const setupClient = require('./lib/client')
+
+const setupSale = require('./lib/sale')
 
 const defaults = require('defaults')
 
@@ -31,11 +39,19 @@ module.exports = async function (uri, config) {
   const UserModel = await setupUserModel(uri, config)
   const ClientModel = await setupClientModel(uri, config)
 
+  const CurrierModel = await setupCurrierModel(uri, config)
+  const BusinessModel = await setupBusinessModel(uri, config)
+  const ProductModel = await setupProductModel(uri, config)
+
+  const SaleModel = await setupSaleModel(uri, config)
+
   const User = setupUser(UserModel)
   const Client = setupClient(ClientModel, UserModel)
+  const Sale = setupSale(SaleModel)
 
   return {
     User,
-    Client
+    Client,
+    Sale
   }
 }

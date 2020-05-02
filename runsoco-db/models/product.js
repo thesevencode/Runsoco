@@ -1,28 +1,41 @@
 'use strict'
 
 const Mongoose = require('mongoose')
-const Schema = Mongoose.Schema
 const setupDatabase = require('../lib/db')
 
-module.exports = async function setupClientModel (uri, config) {
+module.exports = async function setupProductModel (uri, config) {
   const mongoose = await setupDatabase(uri, config)
 
-  
-
   const productSchema = new Mongoose.Schema({
-    //password
-    _idBusiness: {  
-        type: Schema.ObjectId,
-        ref: 'business',
-        required:true
+    business: {
+      type: Mongoose.Schema.ObjectId,
+      ref: 'Business',
+      required: true
     },
-    name: String,
-    descripcion: String,
-    precio: Number,
-    type: String,
-
-
+    name: {
+      type: String,
+      required: true,
+      select: true
+    },
+    description: {
+      type: String,
+      required: true,
+      select: true
+    },
+    img: {
+      type: String,
+      select: true
+    },
+    price: {
+      type: Number,
+      required: true,
+      select: true
+    },
+    category: {
+      type: String,
+      select: true
+    }
   }, { timestamps: true })
 
-  return mongoose.model('Client', productSchema)
+  return mongoose.model('Product', productSchema)
 }

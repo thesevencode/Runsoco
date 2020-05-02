@@ -1,40 +1,16 @@
 'use strict'
 
 const Mongoose = require('mongoose')
-const Schema = Mongoose.Schema
 const setupDatabase = require('../lib/db')
 
 module.exports = async function setupClientModel (uri, config) {
   const mongoose = await setupDatabase(uri, config)
 
-  const locationSchema = new Schema({
-    latitude: {
-      type: Number,
-      required: true,
-      select: true
-    },
-    longitude: {
-      type: Number,
-      required: true,
-      select: true
-    },
-    address: {
-      type: String,
-      required: true,
-      select: true
-    },
-    description: {
-      type: String,
-      required: false,
-      select: true
-    }
-  }, { timestamps: true, required: false, select: true })
-
   const clientSchema = new Mongoose.Schema({
     user: {
-      type: Schema.ObjectId,
+      type: Mongoose.Schema.ObjectId,
       ref: 'User',
-      required:true
+      required: true
     },
     shareCode: {
       type: String,
@@ -62,9 +38,8 @@ module.exports = async function setupClientModel (uri, config) {
       required: false,
       unique: false,
       select: true
-    },
+    }
 
-    // codigo: { type: String },
     // puntos: { type: Number }
   }, { timestamps: true })
 

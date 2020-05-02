@@ -4,8 +4,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const chalk = require('chalk')
+const jwt = require('express-jwt')
+var blacklist = require('express-jwt-blacklist');
 
 const routes = require('./app/routes')
+const config = require('./config/index')
 const { HandleFatalError } =  require('./utils')
 
 
@@ -30,6 +33,17 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     next();
 })
+
+
+blacklist.configure({
+    tokenId: '_id'
+})
+
+app.use(jwt({
+    secret: config.keyToken,
+    credentialsRequired: false,
+    isRevoked: blacklist.isRevoked
+}))
 
 
 routes(app)
