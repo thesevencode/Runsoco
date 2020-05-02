@@ -80,7 +80,7 @@
 - }
 
 
-## Cerrar Sesión
+## Cerrar Sesión : GET
 *localhost:3000/api/auth/logout*
 
 **Ejemplo**
