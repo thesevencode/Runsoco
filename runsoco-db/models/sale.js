@@ -101,6 +101,11 @@ module.exports = async function setupSaleModel (uri, config) {
       type: String,
       required: false,
       select: true
+    },
+    type: {
+      type: String,
+      required: true,
+      select: true
     }
   }, { timestamps: true })
 

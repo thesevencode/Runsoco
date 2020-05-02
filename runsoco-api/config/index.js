@@ -6,5 +6,7 @@ const auth = require('./auth')
 module.exports = {
     db,
     auth,
-    keyToken: 'bytecodePuerto2019'
+    TOKEN: {
+        secret: process.env.SECRET_TOKEN || 'bytecodePuerto2019'
+    }
 }

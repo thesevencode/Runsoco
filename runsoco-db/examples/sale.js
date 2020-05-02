@@ -15,7 +15,8 @@ async function run () {
 //     cellphone: 958227852,
 //     category: "comida",
 //     store: 'Polleria El Pollon',
-//     priceDelivery: 5
+//     priceDelivery: 5,
+//     type: "outStore",
 //   }
 
 //   const nuevoPedido = await Sale.create(pedido).catch(handleFatalError)

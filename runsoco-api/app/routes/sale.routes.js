@@ -1,10 +1,13 @@
 'use strict'
 
 const express = require('express')
+const auth = require('express-jwt')
+const guard = require('express-jwt-permissions')()
 const { validate } = require('express-validation')
 
 const { saleController } = require('../controllers')()
-const { clientValidation } = require('../validation')
+const { saleValidation } = require('../validation')
+const { TOKEN } = require('../../config/index')
 
 const router = express.Router()
 
@@ -16,7 +19,7 @@ module.exports = async () => {
         .get('/', (req, res) => {
             res.send("hola mundo")
         })
-        .post('/signIn', controller.register)//registro de cliente
+        .post('/outstore', auth(TOKEN), guard.check(['client:true']), validate(saleValidation.outstore), controller.register) //registro de cliente
 
     return router
 }

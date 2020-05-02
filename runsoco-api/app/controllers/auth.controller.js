@@ -1,11 +1,12 @@
 'use strict'
+const blacklist = require('express-jwt-blacklist')
 const bcrypt = require('bcryptjs')
 const httpStatus = require('http-status')
-const APIError = require('../helper/APIError');
+const APIError = require('../helper/APIError')
 
 const DB = require('../../db')
-const  { Token, HashidsUtils } = require('../../utils')
-const { keyToken } = require('../../config')
+const  { TokenUtils, HashidsUtils } = require('../../utils')
+const {TOKEN} = require('../../config')
 
 module.exports = async () => {
     //Iniciamos la base de datos y recuperamo el modelo
@@ -34,7 +35,7 @@ module.exports = async () => {
 
                 const payload = account.toJSON()
                 delete payload.user.password
-                var token = Token.sign(payload, keyToken)
+                var token = TokenUtils.sign(payload, TOKEN.secret, 0)
 
                 return res.status(200).json({
                     token, 
@@ -72,7 +73,7 @@ module.exports = async () => {
                     client.shareCode = generator.generate()
 
                     let result = await Client.createOrUpdate(client)        
-                    var token = Token.sign(result.toJSON(), keyToken)
+                    var token = TokenUtils.sign(result.toJSON(), TOKEN.secret, 0)
                     
                     return res.status(200).json({
                         status: true,
@@ -93,9 +94,18 @@ module.exports = async () => {
         
     }
 
+    async function logout(req, res, next) {
+        blacklist.revoke(req.user);
+        res.status(200).json({
+            status: true,
+            message: 'la sesión ha sido cerrada exitosamente!',
+        })
+    }
+
     return {
         login,
-        loginByFacebook
+        loginByFacebook,
+        logout
     }
 
 }

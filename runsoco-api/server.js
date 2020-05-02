@@ -40,7 +40,7 @@ blacklist.configure({
 })
 
 app.use(jwt({
-    secret: config.keyToken,
+    secret: config.TOKEN.secret,
     credentialsRequired: false,
     isRevoked: blacklist.isRevoked
 }))

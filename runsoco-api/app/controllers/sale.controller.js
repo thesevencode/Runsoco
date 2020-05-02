@@ -3,11 +3,7 @@
 const httpStatus = require('http-status')
 const APIError = require('../helper/APIError');
 
-
 const DB = require('../../db')
-const { Token, HashidsUtils } =  require('../../utils')
-const { keyToken } = require('../../config')
-
 
 module.exports =  async ()=>{
 
@@ -16,7 +12,20 @@ module.exports =  async ()=>{
 
     async function register(req, res, next) {
         let body = req.body
-        console.log("REGISTRANDO PEDIDO")
+        
+        let sale
+        try{
+            sale = await Sale.create(body)
+            res.status(200).json({
+                status: true,
+                message: 'Operacion exitosa, pedido creado!'
+            })
+
+        } catch (e) {
+            //ERROR de la base de datos
+            const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
 
     }
 

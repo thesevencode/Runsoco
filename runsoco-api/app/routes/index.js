@@ -4,6 +4,7 @@ let authRouter = require('./auth.routes')
 let clientRouter = require('./client.routes')
 let saleRouter = require('./sale.routes')
 
+
 const {  ValidationError } = require('express-validation')
 
 const httpStatus = require('http-status')
@@ -14,7 +15,7 @@ module.exports = async (app) => {
 
     app.use('/api/auth', await authRouter())
     app.use('/api/client', await clientRouter())
-    app.use('/api/sale', await saleRouter)
+    app.use('/api/sale', await saleRouter() )
 
 
 
@@ -23,6 +24,9 @@ module.exports = async (app) => {
         if (err instanceof ValidationError) {
             const error = new APIError('Los datos son invalidos!', err.statusCode, true);
             return next(error);
+        }else if(!(err instanceof APIError)){
+            const apiError = new APIError(err.message, err.status, true)
+            return next(apiError)
         }
 
         return next(err)

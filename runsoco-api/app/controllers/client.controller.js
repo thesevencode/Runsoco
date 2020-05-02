@@ -6,8 +6,8 @@ const APIError = require('../helper/APIError');
 
 
 const DB = require('../../db')
-const { Token, HashidsUtils } =  require('../../utils')
-const { keyToken } = require('../../config')
+const { TokenUtils, HashidsUtils } =  require('../../utils')
+const { TOKEN } = require('../../config')
 
 
 module.exports =  async ()=>{
@@ -47,7 +47,7 @@ module.exports =  async ()=>{
             user = await Client.createOrUpdate(body)
             delete user.password
 
-            var token = Token.sign(user.toJSON(), keyToken)
+            var token = TokenUtils.sign(user.toJSON(), TOKEN.secret, 0)
             res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa, usuario creado!',
