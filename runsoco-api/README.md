@@ -78,3 +78,47 @@
   - data: data,
   - token: token
 - }
+
+
+## Cerrar Sesión
+*localhost:3000/api/auth/logout*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+- }
+
+
+## Realizar pedido fuera del stock de los productos que ofrecemos
+*localhost:3000/api/sale/outstore*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+- body = {
+  -    client: String => ID del cliente,
+  -    description: 'pedido nuevo',
+  -    cellphone: 987876542,
+  -    category: 'comida',
+  -    store: 'Polleria Doña Yola',
+  -    priceDelivery: 4,
+  -    type: "outStore" //significa que es un pedido de "pide lo que quieras" en el formulario
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+- }
