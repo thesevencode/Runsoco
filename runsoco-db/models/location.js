@@ -1,9 +1,9 @@
 'use strict'
 
-const Mongoose = require('mongoose')
-const Schema = Mongoose.Schema
+// const Mongoose = require('mongoose')
+// const Schema = Mongoose.Schema
 
-const locationSchema = new Schema({
+const locationModel = {
   latitude: {
     type: Number,
     required: true,
@@ -24,6 +24,6 @@ const locationSchema = new Schema({
     required: false,
     select: true
   }
-}, { timestamps: true })
+}
 
-module.exports = locationSchema
+module.exports = locationModel

@@ -122,3 +122,22 @@
   - status: true/false,
   - message: "mensaje configurado por respuesta",
 - }
+
+##  NEGOCIOS
+
+### GET:Realizar busqueda de los negocios POR TIPO
+*localhost:3000/api/business/:type*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - data: [] => arreglo de todos los negocios encontrados
+- }
+

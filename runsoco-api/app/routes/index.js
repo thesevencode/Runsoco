@@ -2,6 +2,7 @@
 
 let authRouter = require('./auth.routes')
 let clientRouter = require('./client.routes')
+let businessRouter = require('./business.routes')
 let saleRouter = require('./sale.routes')
 
 
@@ -15,6 +16,7 @@ module.exports = async (app) => {
 
     app.use('/api/auth', await authRouter())
     app.use('/api/client', await clientRouter())
+    app.use('/api/business', await businessRouter())
     app.use('/api/sale', await saleRouter() )
 
 

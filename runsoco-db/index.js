@@ -12,7 +12,7 @@ const setupSaleModel = require('./models/sale')
 
 const setupUser = require('./lib/user')
 const setupClient = require('./lib/client')
-
+const setupBusiness = require('./lib/business')
 const setupSale = require('./lib/sale')
 
 const defaults = require('defaults')
@@ -36,22 +36,23 @@ module.exports = async function (uri, config) {
   })
 
   const mongoose = await setupDabatase(uri, config)
+
   const UserModel = await setupUserModel(uri, config)
   const ClientModel = await setupClientModel(uri, config)
-
   const CurrierModel = await setupCurrierModel(uri, config)
   const BusinessModel = await setupBusinessModel(uri, config)
   const ProductModel = await setupProductModel(uri, config)
-
   const SaleModel = await setupSaleModel(uri, config)
 
   const User = setupUser(UserModel)
   const Client = setupClient(ClientModel, UserModel)
+  const Business = setupBusiness(BusinessModel)
   const Sale = setupSale(SaleModel)
 
   return {
     User,
     Client,
+    Business,
     Sale
   }
 }

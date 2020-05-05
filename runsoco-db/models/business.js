@@ -6,7 +6,7 @@ const setupDatabase = require('../lib/db')
 module.exports = async function setupBusinessModel (uri, config) {
   const mongoose = await setupDatabase(uri, config)
 
-  const locationSchema = require('./location')
+  const locationModel = require('./location')
 
   const businessSchema = new Mongoose.Schema({
     // password
@@ -18,37 +18,70 @@ module.exports = async function setupBusinessModel (uri, config) {
     businessName: {
       type: String,
       required: true,
-      select: false
-    },
-    ruc: {
-      type: String,
-      required: true,
       select: false,
       lowercase: true
+    },
+    ruc: {
+      type: Number,
+      required: true,
+      select: false
+    },
+    img: {
+      type: String,
+      required: true,
+      select: true
     },
     address: {
       type: String,
       required: true,
       select: true
     },
-    horary: {
+    horary: [{
+      day: { 
+        type: String,
+        required: true,
+        select: true 
+      },
       open: {
         type: Number,
-        required: true,
+        required: false,
         select: true
       },
       close: {
         type: Number,
-        required: true,
+        required: false,
         select: true
       }
-    },
-    location: locationSchema,
+    }],
+    location: { locationModel },
     type: [{
+      type: String
+    }],
+    city: {
+      type: String,
+      required: true,
+      select: true
+    },
+    district: {
+      type: String,
+      required: true,
+      select: false
+    },
+    province: {
+      type: String,
+      required: true,
+      select: false
+    },
+    department : {
+      type: String,
+      required: true,
+      select: false
+    },
+    phones: [{
       type: String
     }]
 
-  }, { timestamps: true })
+  }, { timestamps: true, select: false })
 
   return mongoose.model('Business', businessSchema)
 }
