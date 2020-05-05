@@ -57,16 +57,23 @@ async function run () {
         address: "6 De Diciembre 195, Puerto Maldonado 17001"
     },
     type: ["restaurante"],
+    categories: [{
+            description: "vegetariana"
+        }, {
+            description: "saludable"
+        }, {
+            description: "mariscos"
+    }],
     phones: ["981935422"]
   }
 
-//   const nuevaEmpresa = await Business.create(empresa).catch(handleFatalError)
-//   console.log('PEDIDO NUEVO: ', nuevaEmpresa)
+  const nuevaEmpresa = await Business.create(empresa).catch(handleFatalError)
+  console.log('PEDIDO NUEVO: ', nuevaEmpresa)
 
   // ======= BUSCANDO POR TYPE
 
-    var search = await Business.findByType('heladeria').catch(handleFatalError)
-    console.log('RESULTADO: ', search)
+    // var search = await Business.findByType('heladeria').catch(handleFatalError)
+    // console.log('RESULTADO: ', search)
 
 
 }

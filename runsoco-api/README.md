@@ -141,3 +141,22 @@
   - data: [] => arreglo de todos los negocios encontrados
 - }
 
+##  PRODUCTOS
+
+### GET:Obtener productos por una negocio especifico 
+*localhost:3000/api/product/:idBusiness*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - data: [] => arreglo de todos los negocios encontrados
+- }
+
+

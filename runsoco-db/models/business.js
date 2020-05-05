@@ -53,7 +53,7 @@ module.exports = async function setupBusinessModel (uri, config) {
         select: true
       }
     }],
-    location: { locationModel },
+    location: locationModel ,
     type: [{
       type: String
     }],
@@ -79,7 +79,17 @@ module.exports = async function setupBusinessModel (uri, config) {
     },
     phones: [{
       type: String
-    }]
+    }],
+    categories: [{
+      description: {
+        type: String,
+        required: true
+      },
+      img: {
+        type: String, 
+        required: false
+      }
+     }]
 
   }, { timestamps: true, select: false })
 

@@ -13,6 +13,7 @@ const setupSaleModel = require('./models/sale')
 const setupUser = require('./lib/user')
 const setupClient = require('./lib/client')
 const setupBusiness = require('./lib/business')
+const setupProduct = require('./lib/product')
 const setupSale = require('./lib/sale')
 
 const defaults = require('defaults')
@@ -47,12 +48,14 @@ module.exports = async function (uri, config) {
   const User = setupUser(UserModel)
   const Client = setupClient(ClientModel, UserModel)
   const Business = setupBusiness(BusinessModel)
+  const Product = setupProduct(ProductModel)
   const Sale = setupSale(SaleModel)
 
   return {
     User,
     Client,
     Business,
+    Product,
     Sale
   }
 }

@@ -19,12 +19,13 @@ module.exports = async function setupProductModel (uri, config) {
     },
     description: {
       type: String,
-      required: true,
+      required: false,
       select: true
     },
     img: {
       type: String,
-      select: true
+      select: true,
+      required: true
     },
     price: {
       type: Number,
@@ -33,6 +34,7 @@ module.exports = async function setupProductModel (uri, config) {
     },
     category: {
       type: String,
+      required: false,
       select: true
     }
   }, { timestamps: true })
