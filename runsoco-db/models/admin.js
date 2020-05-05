@@ -24,12 +24,6 @@ module.exports = async function setupAdminModel (uri, config) {
       trim: true,
       unique: true,
       select: true
-    },
-    cellphone: {
-      type: Number,
-      required: false,
-      unique: false,
-      select: true
     }
   }, { timestamps: true })
 

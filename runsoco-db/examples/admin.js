@@ -13,8 +13,7 @@ async function run () {
         name: 'Denis',
         lastName: 'Vilcas Villalba',
         email: 'denisricardovilcasvillalba@gmail.com',
-        password: "15121015",
-        cellphone: 958227852
+        password: "15121015"
     }
 
 

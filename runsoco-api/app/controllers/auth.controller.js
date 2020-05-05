@@ -10,7 +10,7 @@ const {TOKEN} = require('../../config')
 
 module.exports = async () => {
     //Iniciamos la base de datos y recuperamo el modelo
-    const { Client } = await DB()
+    const { Client, Admin } = await DB()
 
 
     async function login(req, res, next) {
@@ -102,10 +102,56 @@ module.exports = async () => {
         })
     }
 
+
+    //ADMINISTRADOR
+    async function loginAdmin(req, res, next) {
+        let client =  req.body
+
+        let account
+        try{
+            //buscamos cuenta por email
+            account =  await Admin.findByEmailSelectPassword(client.email)
+
+        } catch (e){
+            //ERROR de la base de datos
+            const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+    
+        }
+
+        //verificamos si encontramos un usuario
+        if(account){
+            //comparar contraseñas
+            if(bcrypt.compareSync(client.password, account.user.password)) {
+
+                const payload = account.toJSON()
+                delete payload.user.password
+                var token = TokenUtils.sign(payload, TOKEN.secret, 0)
+
+                return res.status(200).json({
+                    token, 
+                    status:true, 
+                    data: payload,
+                    message: 'Inicio de sesión exitoso!' 
+                })
+            } 
+
+            return next(new APIError('Las credenciales son incorrectas!', httpStatus.BAD_REQUEST, true))
+
+        } 
+
+
+        //Error de que la cuenta no existe
+        return next(new APIError('La cuenta no se encuentra registrada!', httpStatus.NOT_FOUND , true))
+        
+    }
+
     return {
         login,
         loginByFacebook,
-        logout
+        logout,
+
+        loginAdmin
     }
 
 }
