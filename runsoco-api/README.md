@@ -144,7 +144,7 @@
 ##  PRODUCTOS
 
 ### GET:Obtener productos por una negocio especifico 
-*localhost:3000/api/product/:idBusiness*
+*localhost:3000/api/product/business/:idBusiness*
 
 **Ejemplo**
 
