@@ -15,27 +15,27 @@ module.exports = async function setupCurrierModel (uri, config) {
     name: {
       type: String,
       required: true,
-      select: true,
+      select: true
     },
     lastName: {
       type: String,
       required: true,
-      select: true,
+      select: true
     },
     sexo: {
-        type: String,
-        required: true,
-        select: true,
+      type: String,
+      required: true,
+      select: true
     },
     age: {
-        type: Number,
-        required: true,
-        select: true,
+      type: Number,
+      required: true,
+      select: true
     },
     dni: {
-        type: Number,
-        required: true,
-        select: true,
+      type: Number,
+      required: true,
+      select: true
     },
     address: {
       type: String,
@@ -50,27 +50,27 @@ module.exports = async function setupCurrierModel (uri, config) {
       select: true
     },
     vehicle: {
-        enrollment: {
-            type: String,
-            required: true,
-            select: true
-        },
-        license: {
-            type: String,
-            required: true,
-            select: true
-        },
-        type: {
-            type: String,
-            required: true,
-            select: true
-        },
-        soat: {
-            type: String,
-            required: true,
-            select: true
-        }
-        
+      enrollment: {
+        type: String,
+        required: true,
+        select: true
+      },
+      license: {
+        type: String,
+        required: true,
+        select: true
+      },
+      type: {
+        type: String,
+        required: true,
+        select: true
+      },
+      soat: {
+        type: String,
+        required: true,
+        select: true
+      }
+
     }
   }, { timestamps: true })
 

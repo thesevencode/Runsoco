@@ -9,18 +9,18 @@ async function run () {
 
   // ==== CREACION DE NUEVO USUARIO ==========
 
-//   var pedido = {
-//     client: "5eab3b65bb1b4c0024ae2556",
-//     description: 'Pedido nuevo2',
-//     cellphone: 958227852,
-//     category: "comida",
-//     store: 'Polleria El Pollon',
-//     priceDelivery: 5,
-//     type: "outStore",
-//   }
+  //   var pedido = {
+  //     client: "5eab3b65bb1b4c0024ae2556",
+  //     description: 'Pedido nuevo2',
+  //     cellphone: 958227852,
+  //     category: "comida",
+  //     store: 'Polleria El Pollon',
+  //     priceDelivery: 5,
+  //     type: "outStore",
+  //   }
 
-//   const nuevoPedido = await Sale.create(pedido).catch(handleFatalError)
-//   console.log('PEDIDO NUEVO: ', nuevoPedido)
+  //   const nuevoPedido = await Sale.create(pedido).catch(handleFatalError)
+  //   console.log('PEDIDO NUEVO: ', nuevoPedido)
 
   // ======= BUSCANDO POR ID
 

@@ -4,7 +4,6 @@ const Mongoose = require('mongoose')
 const ObjectId = Mongoose.Types.ObjectId
 
 module.exports = function (productModel) {
-
   async function create (product) {
     const result = await productModel.create(product)
     return result.toJSON()
@@ -21,7 +20,7 @@ module.exports = function (productModel) {
       cond,
       { $set: product }
     )
-    return productModel.findOne(cond) 
+    return productModel.findOne(cond)
   }
 
   function findById (_id) {
@@ -31,12 +30,12 @@ module.exports = function (productModel) {
     return productModel.findById(_id)
   }
 
-  function findByIdBusiness(_idBusiness){
+  function findByIdBusiness (_idBusiness) {
     if (!ObjectId.isValid(_idBusiness)) {
       return null
     }
     const cond = {
-        business: _idBusiness
+      business: _idBusiness
     }
 
     return productModel.find(cond)
@@ -46,6 +45,6 @@ module.exports = function (productModel) {
     create, // implementado
     update, // implementado
     findById, // implementado
-    findByIdBusiness //implementado
+    findByIdBusiness // implementado
   }
 }

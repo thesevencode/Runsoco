@@ -9,23 +9,21 @@ async function run () {
   // ==== CREACION DE NUEVO EMPRESA ==========
 
   var producto = {
-    business: "5eb0e8573a443324d878789d",
-    name: "Ensalada mexicana",
-    description: "",
-    img: "https://astoria.com.pe/wp-content/uploads/2018/09/193-420x280.jpg",
+    business: '5eb0e8573a443324d878789d',
+    name: 'Ensalada mexicana',
+    description: '',
+    img: 'https://astoria.com.pe/wp-content/uploads/2018/09/193-420x280.jpg',
     price: 14.5,
-    category: "ensaladas"
+    category: 'ensaladas'
   }
 
-//   const nuevoProducto = await Product.create(producto).catch(handleFatalError)
-//   console.log('PRODUCTO NUEVO: ', nuevoProducto)
+  //   const nuevoProducto = await Product.create(producto).catch(handleFatalError)
+  //   console.log('PRODUCTO NUEVO: ', nuevoProducto)
 
   // ======= BUSCANDO POR TYPE
 
-    var search = await Product.findByIdBusiness('5eb0937a312e8a1d1851db95').catch(handleFatalError)
-    console.log('RESULTADO: ', search)
-
-
+  var search = await Product.findByIdBusiness('5eb0937a312e8a1d1851db95').catch(handleFatalError)
+  console.log('RESULTADO: ', search)
 }
 
 function handleFatalError (err) {

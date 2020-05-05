@@ -37,10 +37,10 @@ module.exports = async function setupBusinessModel (uri, config) {
       select: true
     },
     horary: [{
-      day: { 
+      day: {
         type: String,
         required: true,
-        select: true 
+        select: true
       },
       open: {
         type: Number,
@@ -53,7 +53,7 @@ module.exports = async function setupBusinessModel (uri, config) {
         select: true
       }
     }],
-    location: locationModel ,
+    location: locationModel,
     type: [{
       type: String
     }],
@@ -72,7 +72,7 @@ module.exports = async function setupBusinessModel (uri, config) {
       required: true,
       select: false
     },
-    department : {
+    department: {
       type: String,
       required: true,
       select: false
@@ -86,10 +86,10 @@ module.exports = async function setupBusinessModel (uri, config) {
         required: true
       },
       img: {
-        type: String, 
+        type: String,
         required: false
       }
-     }]
+    }]
 
   }, { timestamps: true, select: false })
 

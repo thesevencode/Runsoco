@@ -32,17 +32,17 @@ module.exports = async function setupSaleModel (uri, config) {
     address: {
       type: String,
       required: false,
-      select: true,
+      select: true
     },
     state: [{
-        type: String,
-        hour: Date
-      }
+      type: String,
+      hour: Date
+    }
     ],
     payment: {
-        type: String,
-        required: false,
-        select: true
+      type: String,
+      required: false,
+      select: true
     },
     calificationCurrier: {
       type: Number,
@@ -60,7 +60,7 @@ module.exports = async function setupSaleModel (uri, config) {
         ref: 'Product',
         required: true
       },
-      quantity:{
+      quantity: {
         type: Number,
         required: true,
         select: true
@@ -81,7 +81,7 @@ module.exports = async function setupSaleModel (uri, config) {
       required: false,
       select: false
     },
-    //====================================
+    //= ===================================
     category: {
       type: String,
       required: false,

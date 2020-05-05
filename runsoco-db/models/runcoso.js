@@ -3,7 +3,7 @@
 const Mongoose = require('mongoose')
 const Schema = Mongoose.Schema
 const setupDatabase = require('../lib/db')
-//NO IMPLEMENTADO
+// NO IMPLEMENTADO
 module.exports = async function setupClientModel (uri, config) {
   const mongoose = await setupDatabase(uri, config)
 
