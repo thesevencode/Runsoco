@@ -160,3 +160,48 @@
 - }
 
 
+##  ADMINISTRADOR
+
+## Registrar 
+*localhost:3000/api/admin/signIn*
+
+**Ejemplo**
+
+
+- body = {
+  -    name: 'Dany',
+  -    lastName: 'Quispe Luna',
+  -    email: 'dany@gmail.com'
+  -    password: 'dany'
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  
+  *Si (status = true) retorna un objeto con los datos del usuario y un token, los mismos datos del ejemplo anterior excepto el password*
+- }
+
+## Inicio de Sesión
+*localhost:3000/api/auth/login/admin*
+
+**Ejemplo**
+
+- body = {
+  -    email: 'dany@gmail.com'
+  -    password: 'dany'
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  
+  *Si (status = true) retorna un objeto con los datos del usuario y un token, los mismos datos del ejemplo anterior excepto el password*
+  
+  - data: data,
+  - token: token
+- }
