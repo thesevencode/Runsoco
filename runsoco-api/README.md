@@ -142,9 +142,9 @@
   - address: "Av. Sinchi Roca",
   - payment: "efectivo",
   - products: [{
-      product: "5eb0f07f2e952a3184799550",=>ID DEL PRODUCTO
-      quantity: 1,
-      subtotal: 39
+      - product: "5eb0f07f2e952a3184799550",=>ID DEL PRODUCTO
+      - quantity: 1,
+      - subtotal: 39
     }],
   - category: "comida",
   - cellphone: 987654321,
