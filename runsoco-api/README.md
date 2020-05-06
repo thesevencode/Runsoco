@@ -96,8 +96,10 @@
   - message: "mensaje configurado por respuesta",
 - }
 
+##  PEDIDOS
 
-## Realizar pedido fuera del stock de los productos que ofrecemos
+
+### Realizar pedido fuera del stock de los productos que ofrecemos
 *localhost:3000/api/sale/outstore*
 
 **Ejemplo**
@@ -111,8 +113,10 @@
   -    description: 'pedido nuevo',
   -    cellphone: 987876542,
   -    category: 'comida',
+  -    payment: 'efectivo',
   -    store: 'Polleria Doña Yola',
   -    priceDelivery: 4,
+  -    extraDelivery: 2, =>OPCIONAL: Solo si el pedido tiene un cargo extra
   -    type: "outStore" //significa que es un pedido de "pide lo que quieras" en el formulario
 - }
 
@@ -122,6 +126,41 @@
   - status: true/false,
   - message: "mensaje configurado por respuesta",
 - }
+
+### Realizar pedido de uno de las tiendas registradas
+*localhost:3000/api/sale/instore*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+- body = {
+  - client: "5eb1fd1d121484411478875d", =>ID DEL CLIENTE
+  - business: "5eb1fd1d121484411478875d",=>ID DE LA TIENDA
+  - address: "Av. Sinchi Roca",
+  - payment: "efectivo",
+  - products: [{
+      product: "5eb0f07f2e952a3184799550",=>ID DEL PRODUCTO
+      quantity: 1,
+      subtotal: 39
+    }],
+  - category: "comida",
+  - cellphone: 987654321,
+  - total: 43,
+  - priceDelivery: 4,
+  - type: "inStore"
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+- }
+
+
 
 ##  NEGOCIOS
 

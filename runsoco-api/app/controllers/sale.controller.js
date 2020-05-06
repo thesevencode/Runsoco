@@ -15,6 +15,7 @@ module.exports =  async ()=>{
         
         let sale
         try{
+            
             sale = await Sale.create(body)
             res.status(200).json({
                 status: true,
@@ -22,6 +23,7 @@ module.exports =  async ()=>{
             })
 
         } catch (e) {
+            console.log("ERROR:", e)
             //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)

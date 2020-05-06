@@ -20,6 +20,7 @@ module.exports = async () => {
             res.send("hola mundo")
         })
         .post('/outstore', auth(TOKEN), guard.check(['client:true']), validate(saleValidation.outstore), controller.register) //registro de cliente
+        .post('/instore', auth(TOKEN), guard.check(['client:true']), validate(saleValidation.instore), controller.register) //registro de cliente
 
     return router
 }

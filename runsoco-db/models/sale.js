@@ -35,8 +35,8 @@ module.exports = async function setupSaleModel (uri, config) {
       select: true
     },
     state: [{
-      type: String,
-      hour: Date
+      type: {type: String, required: true},
+      date: {type: Date, required: true}
     }
     ],
     payment: {
