@@ -16,6 +16,7 @@ module.exports = async () => {
     async function login(req, res, next) {
         let client =  req.body
 
+
         let account
         try{
             //buscamos cuenta por email
@@ -30,6 +31,7 @@ module.exports = async () => {
 
         //verificamos si encontramos un usuario
         if(account){
+
             //comparar contraseñas
             if(bcrypt.compareSync(client.password, account.user.password)) {
 
@@ -37,6 +39,7 @@ module.exports = async () => {
                 delete payload.user.password
                 var token = TokenUtils.sign(payload, TOKEN.secret, 0)
 
+                delete payload.permissions
                 return res.status(200).json({
                     token, 
                     status:true, 
@@ -74,7 +77,8 @@ module.exports = async () => {
 
                     let result = await Client.createOrUpdate(client)        
                     var token = TokenUtils.sign(result.toJSON(), TOKEN.secret, 0)
-                    
+
+                    delete result.user.permissions                    
                     return res.status(200).json({
                         status: true,
                         message: 'Operacion exitosa, usuario creado!',
@@ -105,12 +109,12 @@ module.exports = async () => {
 
     //ADMINISTRADOR
     async function loginAdmin(req, res, next) {
-        let client =  req.body
+        let admin =  req.body
 
         let account
         try{
             //buscamos cuenta por email
-            account =  await Admin.findByEmailSelectPassword(client.email)
+            account =  await Admin.findByEmailSelectPassword(admin.email)
 
         } catch (e){
             //ERROR de la base de datos
@@ -122,12 +126,13 @@ module.exports = async () => {
         //verificamos si encontramos un usuario
         if(account){
             //comparar contraseñas
-            if(bcrypt.compareSync(client.password, account.user.password)) {
+            if(bcrypt.compareSync(admin.password, account.user.password)) {
 
                 const payload = account.toJSON()
                 delete payload.user.password
-                var token = TokenUtils.sign(payload, TOKEN.secret, 0)
+                var token = TokenUtils.sign(payload, TOKEN.secret, 1)
 
+                delete payload.permissions
                 return res.status(200).json({
                     token, 
                     status:true, 

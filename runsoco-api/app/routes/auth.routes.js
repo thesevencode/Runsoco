@@ -22,6 +22,8 @@ module.exports = async () => {
         .get('/logout', auth(TOKEN), controller.logout)
         .post('/login', validate(authValidation.login), controller.login)
         .post('/facebook', validate(authValidation.facebook), controller.loginByFacebook)
+        .post('/login/admin', validate(authValidation.login), controller.loginAdmin)
+
 
     return router
 }

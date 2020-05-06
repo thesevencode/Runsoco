@@ -43,8 +43,6 @@ module.exports =  async ()=>{
             const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
         }
-
-    
     }
 
 
