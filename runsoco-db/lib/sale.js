@@ -6,7 +6,7 @@ const ObjectId = Mongoose.Types.ObjectId
 module.exports = function (saleModel) {
   async function create (sale) {
     const result = await saleModel.create(sale)
-    return result.toJSON()
+    return findByIdForAdmin(result.toJSON()._id)
   }
 
   async function update (sale) {
@@ -30,9 +30,26 @@ module.exports = function (saleModel) {
     return saleModel.findById(_id)
   }
 
+  function findByIdForAdmin (_id) {
+    if (!ObjectId.isValid(_id)) {
+      return null
+    }
+    return saleModel.findById(_id)
+            .populate({
+              path: 'client',
+              select: 'email city',
+              populate: { path: 'user' }
+            })
+            .populate('business', ['name', 'address', 'phones', 'type'])
+            .populate('products.product', ['name', 'description','price', 'category'])
+  }
+
   return {
     create, // implementado
     update,
-    findById // implementado
+    findById, // implementado
+
+    //ADMINISTRADOR
+    findByIdForAdmin
   }
 }

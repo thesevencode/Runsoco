@@ -46,13 +46,11 @@ module.exports = async function setupSaleModel (uri, config) {
     },
     calificationCurrier: {
       type: Number,
-      required: false,
-      select: true
+      required: false
     },
     calificationBusiness: {
       type: Number,
-      required: false,
-      select: true
+      required: false
     },
     products: [{
       product: {
@@ -78,8 +76,7 @@ module.exports = async function setupSaleModel (uri, config) {
     },
     extraDelivery: {
       type: Number,
-      required: false,
-      select: false
+      required: false
     },
     //= ===================================
     category: {

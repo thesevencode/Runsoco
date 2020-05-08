@@ -128,15 +128,14 @@ module.exports = async () => {
             //comparar contraseñas
             if(bcrypt.compareSync(admin.password, account.user.password)) {
 
-                const payload = account.toJSON()
-                delete payload.user.password
+                console.log("ACCOUNT:", account)
+
+                const payload = {_id : account._id, email: account.email}
                 var token = TokenUtils.sign(payload, TOKEN.secret, 1)
 
-                delete payload.permissions
                 return res.status(200).json({
                     token, 
                     status:true, 
-                    data: payload,
                     message: 'Inicio de sesión exitoso!' 
                 })
             } 

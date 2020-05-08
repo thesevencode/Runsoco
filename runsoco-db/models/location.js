@@ -6,23 +6,19 @@
 const locationModel = {
   latitude: {
     type: Number,
-    required: true,
-    select: true
+    required: true
   },
   longitude: {
     type: Number,
-    required: true,
-    select: true
+    required: true
   },
   address: {
     type: String,
-    required: true,
-    select: true
+    required: true
   },
   description: {
     type: String,
-    required: false,
-    select: true
+    required: false
   }
 }
 

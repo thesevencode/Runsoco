@@ -15,13 +15,11 @@ module.exports = async function setupClientModel (uri, config) {
     shareCode: {
       type: String,
       required: true,
-      select: true,
       lowercase: true
     },
     city: {
       type: String,
       required: true,
-      select: true,
       lowercase: true
     },
     email: {
@@ -30,14 +28,12 @@ module.exports = async function setupClientModel (uri, config) {
       lowercase: true,
       trim: true,
       unique: true,
-      select: true
     },
     // location_history: [locationSchema],
     cellphone: {
       type: Number,
       required: false,
       unique: false,
-      select: true
     }
 
     // puntos: { type: Number }

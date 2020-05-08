@@ -12,45 +12,37 @@ module.exports = async function setupBusinessModel (uri, config) {
     // password
     name: {
       type: String,
-      required: true,
-      select: true
+      required: true
     },
     businessName: {
       type: String,
       required: true,
-      select: false,
       lowercase: true
     },
     ruc: {
       type: Number,
-      required: true,
-      select: false
+      required: true
     },
     img: {
       type: String,
-      required: true,
-      select: true
+      required: true
     },
     address: {
       type: String,
-      required: true,
-      select: true
+      required: true
     },
     horary: [{
       day: {
         type: String,
-        required: true,
-        select: true
+        required: true
       },
       open: {
         type: Number,
-        required: false,
-        select: true
+        required: false
       },
       close: {
         type: Number,
-        required: false,
-        select: true
+        required: false
       }
     }],
     location: locationModel,
@@ -59,8 +51,7 @@ module.exports = async function setupBusinessModel (uri, config) {
     }],
     city: {
       type: String,
-      required: true,
-      select: true
+      required: true
     },
     district: {
       type: String,
@@ -91,7 +82,7 @@ module.exports = async function setupBusinessModel (uri, config) {
       }
     }]
 
-  }, { timestamps: true, select: false })
+  }, { timestamps: true })
 
   return mongoose.model('Business', businessSchema)
 }

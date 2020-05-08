@@ -14,28 +14,23 @@ module.exports = async function setupProductModel (uri, config) {
     },
     name: {
       type: String,
-      required: true,
-      select: true
+      required: true
     },
     description: {
       type: String,
-      required: false,
-      select: true
+      required: false
     },
     img: {
       type: String,
-      select: true,
       required: true
     },
     price: {
       type: Number,
-      required: true,
-      select: true
+      required: true
     },
     category: {
       type: String,
-      required: false,
-      select: true
+      required: false
     }
   }, { timestamps: true })
 

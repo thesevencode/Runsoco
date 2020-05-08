@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const jwt = require('express-jwt')
 var blacklist = require('express-jwt-blacklist');
 
+const socket = require('./socket.js')
 const routes = require('./app/routes')
 const config = require('./config/index')
 const { HandleFatalError } =  require('./utils')
@@ -54,9 +55,13 @@ if (!module.parent) { // verificamos que el archivo ha sido requerido
     process.on('unhandledRejection', HandleFatalError)
 
     server.listen(port, () => {
+
         console.log(`${
             chalk.green('[runsoco-api]')
             } server listened on port ${port}`)
+
+        //Inicar conexíon a SOCKET DEL SERVER
+        socket()
     })
 }
 
