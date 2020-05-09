@@ -5,7 +5,7 @@ const setup = require('./setup')
 
 async function run () {
   const { uri, config } = setup
-  const { Sale } = await db(uri, config).catch(handleFatalError)
+  const { Sale, Receive } = await db(uri, config).catch(handleFatalError)
 
   // ==== CREACION DE NUEVO PEDIDO ==========
 
@@ -45,8 +45,11 @@ async function run () {
 
   // ======= BUSCANDO POR ID
 
-  var search = await Sale.findById('5eacdbb41ca0550be8c4e634').catch(handleFatalError)
-  console.log('RESULTADO: ', search)
+  // var search = await Sale.findById('5eacdbb41ca0550be8c4e634').catch(handleFatalError)
+  // console.log('RESULTADO: ', search)
+
+  var all = await Receive.findAll().catch(handleFatalError)
+  console.log('RESULTADO: ', all)
 }
 
 function handleFatalError (err) {

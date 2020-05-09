@@ -1,13 +1,18 @@
 const io = require('socket.io-client')
-socket = io('http://localhost:5000/sale', { 'forceNew': true, query:{
-    id: 'jljnkl'
+socket = io('https://bytecode-socket.herokuapp.com/sale', { 'forceNew': true, query:{
+    id: '5eb1fd1d12148441147887jk'
 }})
 
 socket.on('connect', () => {
 
     console.log("CONECTADO CLIENTE: ", socket.id)
 
-    socket.on('accept',function(data){
-        console.log("MI PEDIDO HA SIDO ACEPTADO", data)
-    })
 });
+
+socket.on('refuse',function(data){
+    console.log("MI PEDIDO HA SIDO RECHAZADO", data)
+})
+
+socket.on('accept',function(data){
+    console.log("MI PEDIDO HA SIDO ACEPTADO", data)
+})

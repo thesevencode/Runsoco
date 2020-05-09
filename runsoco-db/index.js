@@ -10,6 +10,7 @@ const setupBusinessModel = require('./models/business')
 const setupProductModel = require('./models/product')
 const setupSaleModel = require('./models/sale')
 
+
 const setupUser = require('./lib/user')
 const setupClient = require('./lib/client')
 const setupAdmin = require('./lib/admin')
@@ -19,6 +20,11 @@ const setupAdmin = require('./lib/admin')
 const setupBusiness = require('./lib/business')
 const setupProduct = require('./lib/product')
 const setupSale = require('./lib/sale')
+
+
+// Colecciones pajaseras
+const setupReceiveModel = require('./models/receive')
+const setupReceive = require('./lib/receive')
 
 const defaults = require('defaults')
 
@@ -52,12 +58,17 @@ module.exports = async function (uri, config) {
   const ProductModel = await setupProductModel(uri, config)
   const SaleModel = await setupSaleModel(uri, config)
 
+  const ReceiveModel = await setupReceiveModel(uri, config)
+
+
   const User = setupUser(UserModel)
   const Client = setupClient(ClientModel, UserModel)
   const Admin = setupAdmin(AdminModel, UserModel)
   const Business = setupBusiness(BusinessModel)
   const Product = setupProduct(ProductModel)
   const Sale = setupSale(SaleModel)
+  const Receive = setupReceive(ReceiveModel)
+
 
   return {
     User,
@@ -65,6 +76,7 @@ module.exports = async function (uri, config) {
     Admin,
     Business,
     Product,
-    Sale
+    Sale,
+    Receive
   }
 }

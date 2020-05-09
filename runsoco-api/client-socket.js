@@ -1,5 +1,5 @@
 const io = require('socket.io-client')
-socket = io('http://localhost:5000/sale', { 'forceNew': true, query:{
+socket = io('https://bytecode-socket.herokuapp.com/sale', { 'forceNew': true, query:{
     id: '5eb1fd1d121484411478875d'
 }})
 

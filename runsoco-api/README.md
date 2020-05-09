@@ -161,7 +161,6 @@
 - }
 
 
-
 ##  NEGOCIOS
 
 ### GET:Realizar busqueda de los negocios POR TIPO
@@ -200,6 +199,8 @@
 
 
 ##  ADMINISTRADOR
+
+
 
 ## Registrar 
 *localhost:3000/api/admin/signIn*
@@ -243,4 +244,60 @@
   
   - data: data,
   - token: token
+- }
+
+## PEDIDOS
+
+### Obtener pedidos RECIBIDOS
+*localhost:3000/api/sale/receive/list*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - data: [] => Arreglo
+- }
+
+### Obtener pedidos EN PROCESO
+*localhost:3000/api/sale/processing/list*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - data: [] => Arreglo
+- }
+
+
+### Confirmar que el pedido esta en Proceso
+*localhost:3000/api/sale/processing/add/:idPedido*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
 - }

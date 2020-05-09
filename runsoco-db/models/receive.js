@@ -7,7 +7,7 @@ module.exports = async function setupSaleModel (uri, config) {
   const mongoose = await setupDatabase(uri, config)
   const ordeModel = require('./order')
 
-  const saleSchema = new Mongoose.Schema(ordeModel, { timestamps: true })
+  const receiveSchema = new Mongoose.Schema(ordeModel,  { toObject: { versionKey: false } } )
 
-  return mongoose.model('Sale', saleSchema)
+  return mongoose.model('Receive', receiveSchema)
 }

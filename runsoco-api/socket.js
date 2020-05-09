@@ -8,7 +8,7 @@ module.exports = () => {
 
    if (!socket) {
       try {
-         socket = io('http://localhost:5000/server', { 'forceNew': true } )
+         socket = io('https://bytecode-socket.herokuapp.com/server', { 'forceNew': true } )
       } catch (error) {
          handleFatalError(error)
       }
