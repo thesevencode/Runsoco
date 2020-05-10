@@ -1,6 +1,6 @@
 const io = require('socket.io-client')
 socket = io('https://bytecode-socket.herokuapp.com/sale', { 'forceNew': true, query:{
-    id: '5eb1fd1d121484411478875d'
+    id: '5ea5bf55930c640024a87217'
 }})
 
 socket.on('connect', () => {

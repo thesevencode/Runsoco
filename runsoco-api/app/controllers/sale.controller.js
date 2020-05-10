@@ -46,7 +46,7 @@ module.exports =  async ()=>{
         let order
         try{
             
-            order = await Receive.findById(idOrder)
+            order = await Receive.findById(idOrder).lean()
         } catch (e) {
             //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
@@ -57,20 +57,16 @@ module.exports =  async ()=>{
         }
 
         order.state.push({type: "completed"})
-        console.log("ORDER 1: ", order)
-        delete order.__v
         try{
-            console.log("ORDER 2: ", order)
+            await Sale.create(order) //Agregamos los datos a la colección
+            await Receive.deleteById(order._id) // eliminamos
 
-            await Sale.create(order)
-
-            // //EMITIR EVENTOS
-            // socket.emit('new-sale', sale)
+            // EMITIMOS AL ADMINISTRADOR QUE EL PEDIDO HA SIDO CONFIRMADO
+            socket.emit('sale-confirmation', order)
 
             res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa, pedido creado!',
-                data: sale._id
             })
 
         } catch (e) {

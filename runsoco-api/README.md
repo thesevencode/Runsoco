@@ -160,6 +160,21 @@
   - message: "mensaje configurado por respuesta",
 - }
 
+### GET:Confirmar que el pedido ha sido recibido por el cliente
+*localhost:3000/api/sale/confirmation/:idSale*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+- }
+
 
 ##  NEGOCIOS
 

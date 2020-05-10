@@ -10,9 +10,10 @@ socket.on('connect', () => {
         console.log("RECIBIENDO MENSAJE", mensaje)
 
         socket.emit('accept-sale', { client: "5eb1fd1d121484411478875d", id: ""})
+    })
 
-        // socket.emit('refuse-sale', { client: "5eb1fd1d121484411478875d", id: ""})
-
+    socket.on('sale-confirmation',function(mensaje){
+        console.log("PEDIDO CONFIRMADO", mensaje)
     })
 
 

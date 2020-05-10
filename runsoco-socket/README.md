@@ -18,6 +18,10 @@ Plataforma implementando con Socket.io
      - console.log("RECIBIENDO PRODUCTO", data)
 - })
 
+socket.on('sale-confirmation', (sale) => {
+     -  console.log("PEDIDO CONFIRMADO", sale)
+})
+
 **Eventos Para EMITIR**
 - socket.emit('accept-sale', { client: "id cliente", id: "id del producto"}) => aceptar pedido
 - socket.emit('refuse-sale', { client: "id cliente", id: "id del producto"}) => rechazar pedido

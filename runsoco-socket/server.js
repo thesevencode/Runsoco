@@ -27,6 +27,11 @@ api.on('connection', (socket) => {
 
     })
 
+    socket.on('sale-confirmation', (sale) => {
+        //Enviar notificacion a los administradores
+        admin.emit('sale-confirmation', sale)
+    })
+
 })
 
 
