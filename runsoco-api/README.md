@@ -188,7 +188,7 @@
 - {
   - status: true/false,
   - message: "mensaje configurado por respuesta",
-  -data: [] => Pedido actual
+  -data: Objeto => Pedido actual
 - }
 
 

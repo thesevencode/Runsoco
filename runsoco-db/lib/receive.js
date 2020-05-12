@@ -64,7 +64,7 @@ module.exports = function (receiveModel) {
     const cond = {
       client: _id
     }
-    return receiveModel.find(cond)
+    return receiveModel.findOne(cond)
             .populate('business', ['name', 'address', 'phones', 'type'])
             .populate('products.product', ['name', 'description','price', 'category'])
   
