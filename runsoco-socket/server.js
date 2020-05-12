@@ -7,12 +7,23 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const socketioJwt   = require("socketio-jwt");
 
+
+
+// CORS
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+    next();
+})
+
+
 const api = io.of('/server')
 const admin = io.of('/admin')
 const sale = io.of('/sale')
 
 let clientsSale = new Map();
-
+const port = process.env.PORT || 5000
 
 
 api.on('connection', (socket) => {
@@ -102,8 +113,8 @@ function searchClientSale(idClient){
 // })
 
 
-server.listen(5000, function() {
-    console.log('Servidor SOCKET corriendo en http://localhost:5000');
+server.listen(port, function() {
+    console.log('Servidor SOCKET corriendo en http://localhost:'+ port);
 });
     
 
