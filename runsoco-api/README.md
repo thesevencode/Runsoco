@@ -176,7 +176,7 @@
 - }
 
 ### GET:Obtener pedido actual del  cliente
-*localhost:3000/api/sale/cliente*
+*localhost:3000/api/sale/client*
 
 **Ejemplo**
 
