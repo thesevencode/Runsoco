@@ -5,7 +5,8 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const chalk = require('chalk')
 const jwt = require('express-jwt')
-var blacklist = require('express-jwt-blacklist');
+var blacklist = require('express-jwt-blacklist')
+const cors = require("cors")
 
 const socket = require('./socket.js')
 const routes = require('./app/routes')
@@ -27,13 +28,14 @@ app.use(morgan('combined'))
 
 
 
-// CORS
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-    next();
-})
+// // CORS
+// app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+//     next();
+// })
+app.use(cors())
 
 
 blacklist.configure({

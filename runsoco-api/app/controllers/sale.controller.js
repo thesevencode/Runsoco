@@ -145,7 +145,7 @@ module.exports =  async ()=>{
             if(order.client.tokenPush){
                  //Enviar Notificación al usuario
                 const notification = new ExpoPushNotification([order.client.tokenPush], {title: 'Runsoco', body: 'Tu pedido esta en camino!'})
-                notification.send()
+                await notification.send()
             }
 
         
