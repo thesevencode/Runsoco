@@ -4,6 +4,7 @@
 
 # Rutas
 
+
 ## Registrar cliente
 *localhost:3000/api/client/signIn*
 
@@ -30,7 +31,26 @@
   - token: token
 - }
 
-***Ser preciso con el nombre de los datos que se tiene que enviar, tal y como muestra el ejemplo***
+## Registrar TOKEN PUSH
+*localhost:3000/api/client/notification*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+- body = {
+  -    tokenPush: '' => token obtenido por la aplicación
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta"
+- }
+
 
 ## Inicio de Sesión cliente
 *localhost:3000/api/auth/login*
