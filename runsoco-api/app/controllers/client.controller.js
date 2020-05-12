@@ -63,9 +63,30 @@ module.exports =  async ()=>{
     
     }
 
+    async function update(req, res, next) {
+        let body = req.body
+        body._id = req.user._id
+
+        try {
+             await Client.createOrUpdate(body)
+
+             res.status(200).json({
+                status: true,
+                message: 'Operacion exitosa, datos actualizados!',
+            })
+        } catch (e) {
+            //ERROR de la base de datos
+            const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+
+    
+    }
+
 
     return {
-        signIn
+        signIn,
+        update
     }
 
 }

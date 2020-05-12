@@ -17,6 +17,10 @@ module.exports = async function setupClientModel (uri, config) {
       required: true,
       lowercase: true
     },
+    tokenPush: {
+      type: String,
+      required: false
+    },
     city: {
       type: String,
       required: true,

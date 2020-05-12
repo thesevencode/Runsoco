@@ -9,11 +9,11 @@ async function run () {
   // ==== CREACION DE NUEVO EMPRESA ==========
 
   var empresa = {
-    name: "Burgos'S",
-    businessName: "BURGOS'S RESTAURANT S.A.C.",
+    name: "Pizzeria Israel",
+    businessName: "PIZZERIA ISRAEL S.A.C.",
     ruc: 20602929524,
     city: 'Puerto Maldonado',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/07/d3/2c/52/burgos-s-restaurante.jpg',
+    img: 'https://scontent-lim1-1.xx.fbcdn.net/v/t1.0-9/13260157_677734439035671_9211639863977875870_n.jpg?_nc_cat=111&_nc_sid=dd9801&_nc_eui2=AeG9wa6n9tgfE_W7G-d5HyC_JLJ6siTG400ksnqyJMbjTZRuu02z9QX1W7SPVHY9vPngkvSU6raD4T0iVJF1WYia&_nc_ohc=LKmYYqQrfkEAX8nUdlj&_nc_ht=scontent-lim1-1.xx&oh=c39d5eab09397ebf7ce5f03e84411339&oe=5EE0C1D0',
     district: 'Tambopata',
     province: 'Tambopata',
     department: 'Madre de Dios',
@@ -56,13 +56,13 @@ async function run () {
       longitude: -69.201733,
       address: '6 De Diciembre 195, Puerto Maldonado 17001'
     },
-    type: ['restaurante'],
+    type: ['pizzeria'],
     categories: [{
-      description: 'vegetariana'
+      description: 'familiar'
     }, {
-      description: 'saludable'
+      description: 'mixta'
     }, {
-      description: 'mariscos'
+      description: 'pasta'
     }],
     phones: ['981935422']
   }

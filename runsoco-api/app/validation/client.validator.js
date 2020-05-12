@@ -11,5 +11,10 @@ module.exports = {
            password: Joi.string().required(),
            terms:  Joi.boolean().required()
         })
+    },
+    notification : { 
+        body : Joi.object({  
+            tokenPush: Joi.string().required()
+        })
     }
 }

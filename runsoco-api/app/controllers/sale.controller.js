@@ -1,7 +1,10 @@
 'use strict'
 
 const httpStatus = require('http-status')
-const APIError = require('../helper/APIError');
+
+const APIError = require('../helper/APIError')
+const ExpoPushNotification = require('../helper/ExpoPushNotification');
+
 
 const socket = require('../../socket')()
 
@@ -138,6 +141,14 @@ module.exports =  async ()=>{
         order.state.push({ type: "processing" })
         try{
             await Receive.update(order)
+
+            if(order.client.tokenPush){
+                 //Enviar Notificación al usuario
+                const notification = new ExpoPushNotification([order.client.tokenPush], {title: 'Runsoco', body: 'Tu pedido esta en camino!'})
+                notification.send()
+            }
+
+        
             res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa!'

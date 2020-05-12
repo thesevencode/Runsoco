@@ -36,7 +36,7 @@ module.exports = function (receiveModel) {
     return receiveModel.findById(_id)
             .populate({
               path: 'client',
-              select: 'email city',
+              select: 'email city tokenPush',
               populate: { path: 'user' }
             })
             .populate('business', ['name', 'address', 'phones', 'type'])
