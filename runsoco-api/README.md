@@ -112,7 +112,7 @@
   -    client: String => ID del cliente,
   -    description: 'pedido nuevo',
   -    cellphone: 987876542,
-  -    category: 'comida',
+  -    address: 'av. madre de dios',
   -    payment: 'efectivo',
   -    store: 'Polleria Doña Yola',
   -    priceDelivery: 4,
@@ -173,6 +173,22 @@
 - {
   - status: true/false,
   - message: "mensaje configurado por respuesta",
+- }
+
+### GET:Obtener pedido actual del  cliente
+*localhost:3000/api/sale/cliente*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  -data: [] => Pedido actual
 - }
 
 

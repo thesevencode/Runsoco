@@ -57,6 +57,19 @@ module.exports = function (receiveModel) {
     return receiveModel.find(cond)
   }
 
+  function findByClient (_id) {
+    if (!ObjectId.isValid(_id)) {
+      return null
+    }
+    const cond = {
+      client: _id
+    }
+    return receiveModel.find(cond)
+            .populate('business', ['name', 'address', 'phones', 'type'])
+            .populate('products.product', ['name', 'description','price', 'category'])
+  
+  }
+
   function deleteById (_id) {
     if (!ObjectId.isValid(_id)) {
       return null
@@ -68,6 +81,7 @@ module.exports = function (receiveModel) {
     create, // implementado
     update,
     findById, // implementado
+    findByClient,
 
     //ADMINISTRADOR
     findByIdForAdmin,

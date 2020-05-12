@@ -22,6 +22,7 @@ module.exports = async () => {
         .post('/outstore', auth(TOKEN), guard.check(['client:true']), validate(saleValidation.outstore), controller.register) //registro de cliente
         .post('/instore', auth(TOKEN), guard.check(['client:true']), validate(saleValidation.instore), controller.register) //registro de cliente
         
+        .get('/client', auth(TOKEN), guard.check(['client:true']), controller.getSaleByClient)
         .get('/confirmation/:idOrder', auth(TOKEN), guard.check(['client:true']), controller.confirmation) //registro de cliente
         .get('/receive/list', auth(TOKEN), guard.check(['admin:true']), controller.getReceiveList) //registro de todos los pedidos recibidos
         .get('/processing/list', auth(TOKEN), guard.check(['admin:true']), controller.getProcessingList) //registro de todos los pedidos recibidos

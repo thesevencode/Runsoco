@@ -150,10 +150,31 @@ module.exports =  async ()=>{
 
     }
 
+    async function getSaleByClient(req, res, next){
+
+        const {_id } = req.user
+        let lista
+        try{
+            lista = await Receive.findByClient(_id)
+        }catch(e){
+            const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+
+        res.status(200).json({
+            status: true,
+            message: 'Operacion exitosa!',
+            data: lista
+        })
+    }
+
+
+
 
 
     return {
         register,
+        getSaleByClient,
         confirmation,
         getReceiveList,
         getProcessingList,

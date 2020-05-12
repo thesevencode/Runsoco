@@ -1,6 +1,6 @@
 const io = require('socket.io-client')
-socket = io('http://localhost:5000/admin', { 'forceNew': true , query:{
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFjZmY4NzllMTA0MzAwMjQyZGZhY2MiLCJlbWFpbCI6ImRlbmlzQGdtYWlsLmNvbSIsImNpdHkiOiJwdWVydG8gbWFsZG9uYWRvIiwic2hhcmVDb2RlIjoiemt4eXgiLCJ1c2VyIjp7Il9pZCI6IjVlYWNmZjg3OWUxMDQzMDAyNDJkZmFjYiIsIm5hbWUiOiJkZW5pcyIsIl9fdiI6MH0sImNyZWF0ZWRBdCI6IjIwMjAtMDUtMDJUMDU6MDU6MTEuMjU4WiIsInVwZGF0ZWRBdCI6IjIwMjAtMDUtMDJUMDU6MDU6MTEuMjU4WiIsIl9fdiI6MCwicGVybWlzc2lvbnMiOlsiY2xpZW50OnRydWUiXSwiaWF0IjoxNTg4Mzk1OTExfQ.717H9TF9i8SQLvz-8-ppYgQRCt6RhbvcteUKsmbu59c'
+socket = io('https://bytecode-socket.herokuapp.com/admin', { 'forceNew': true , query:{
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxZjRhYzViNTAxMjI2N2MzMjQ5NmQiLCJlbWFpbCI6ImRlbmlzcmljYXJkb3ZpbGNhc3ZpbGxhbGJhQGdtYWlsLmNvbSIsInBlcm1pc3Npb25zIjpbImFkbWluOnRydWUiXSwiaWF0IjoxNTg5MDk2MDg2LCJleHAiOjE1ODkyNjg4ODZ9.PZTUmjc3kwPWlSkRn1juzk__lsnIKzIB-sJ3qZJx-AQ'
 }})
 
 socket.on('connect', () => {

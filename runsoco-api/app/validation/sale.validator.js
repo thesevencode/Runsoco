@@ -7,7 +7,7 @@ module.exports = {
         body : Joi.object({  
            client: Joi.string().required(),
            description: Joi.string().required(),
-           category: Joi.string().required(),
+           address: Joi.string().required(),
            payment: Joi.string().required(),
            store: Joi.string().required(),
            cellphone: Joi.number().required(),
