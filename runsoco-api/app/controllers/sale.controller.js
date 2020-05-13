@@ -59,6 +59,7 @@ module.exports =  async ()=>{
             return next(new APIError('El pedido no ha sido encontrado!', httpStatus.NOT_FOUND, true))
         }
 
+        order.client = req.user._id
         order.state.push({type: "completed"})
         try{
             await Sale.create(order) //Agregamos los datos a la colección
@@ -122,21 +123,58 @@ module.exports =  async ()=>{
 
     }
 
-    async function getAddProcessing(req, res, next) {
-        const { idReceive } = req.params
 
-        let order
+    async function getSaleByClient(req, res, next){
+
+        const {_id } = req.user
+        let lista
         try{
-            
-            order = await Receive.findById(idReceive)
+            lista = await Receive.findByClient(_id)
+        }catch(e){
+            const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+
+        res.status(200).json({
+            status: true,
+            message: 'Operacion exitosa!',
+            data: lista
+        })
+    }
+
+
+
+    async function postReceiveAccept(req, res, next) {
+        const  {sale} = req.body
+        let order = await findById(Receive, sale, next)
+        order.state.push({ type: "processing" })
+        try{
+            await Receive.update(order)
+
+            if(order.client.tokenPush){
+                 //Enviar Notificación al usuario
+                const notification = new ExpoPushNotification([order.client.tokenPush], {title: 'Runsoco', body: 'Tu pedido esta en camino!'})
+                await notification.send()
+            }
+
+        
+            res.status(200).json({
+                status: true,
+                message: 'Operacion exitosa!'
+            })
         } catch (e) {
             //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
         }
-        if(!order){
-            return next(new APIError('El pedido no ha sido encontrado!', httpStatus.NOT_FOUND, true))
-        }
+
+    }
+
+    async function postReceiveRefuse(req, res, next) {
+        const  {sale} = req.body
+        let order = await findById(Receive, sale, next)
+
+        console.log("Order:", order)
 
         order.state.push({ type: "processing" })
         try{
@@ -161,27 +199,23 @@ module.exports =  async ()=>{
 
     }
 
-    async function getSaleByClient(req, res, next){
 
-        const {_id } = req.user
-        let lista
+    async function findById(ModelDB, id, next){
+        let result
         try{
-            lista = await Receive.findByClient(_id)
-        }catch(e){
+            
+            result = await ModelDB.findById(id)
+        } catch (e) {
+            //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
         }
+        if(!result){
+            return next(new APIError('No ha sido encontrado!', httpStatus.NOT_FOUND, true))
+        }
 
-        res.status(200).json({
-            status: true,
-            message: 'Operacion exitosa!',
-            data: lista
-        })
+        return result
     }
-
-
-
-
 
     return {
         register,
@@ -189,7 +223,8 @@ module.exports =  async ()=>{
         confirmation,
         getReceiveList,
         getProcessingList,
-        getAddProcessing
+        postReceiveAccept,
+        postReceiveRefuse
     }
 
 }

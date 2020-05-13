@@ -26,7 +26,9 @@ module.exports = async () => {
         .get('/confirmation/:idOrder', auth(TOKEN), guard.check(['client:true']), controller.confirmation) //registro de cliente
         .get('/receive/list', auth(TOKEN), guard.check(['admin:true']), controller.getReceiveList) //registro de todos los pedidos recibidos
         .get('/processing/list', auth(TOKEN), guard.check(['admin:true']), controller.getProcessingList) //registro de todos los pedidos recibidos
-        .get('/processing/add/:idReceive', auth(TOKEN), guard.check(['admin:true']), controller.getAddProcessing) //registro de todos los pedidos recibidos
+        
+        .post('/receive/accept', auth(TOKEN), guard.check(['admin:true']), validate(saleValidation.postReceive), controller.postReceiveAccept) //registro de todos los pedidos recibidos
+        .post('/receive/refuse', auth(TOKEN), guard.check(['admin:true']), validate(saleValidation.postReceive),  controller.postReceiveRefuse) //registro de todos los pedidos recibidos
 
     return router
 }

@@ -16,6 +16,11 @@ module.exports = {
            type: Joi.string().required()
         })
     },
+    postReceive : { 
+        body : Joi.object({  
+           sale: Joi.string().required()
+        })
+    },
     instore : { 
         body : Joi.object({  
            client: Joi.string().required(),

@@ -27,7 +27,14 @@ module.exports = function (receiveModel) {
       return null
     }
     return receiveModel.findById(_id)
+            .populate({
+              path: 'client',
+              select: 'tokenPush',
+              populate: { path: 'user' }
+            })
+    
   }
+
 
   function findByIdForAdmin (_id) {
     if (!ObjectId.isValid(_id)) {
