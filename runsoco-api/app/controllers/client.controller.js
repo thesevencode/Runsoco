@@ -28,6 +28,7 @@ module.exports =  async ()=>{
         try {
             user = await Client.findByEmail(body.email)
         } catch (e) {
+            console.log("ERROR FIND:", e)
             //Error de la base de datos
             const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
@@ -40,6 +41,7 @@ module.exports =  async ()=>{
 
         //encriptamos la contraseña
         body.password = bcrypt.hashSync(body.password, 10)
+        body.points = 10//generando puntos
         const generator = new HashidsUtils(body.email)
         body.shareCode = generator.generate()
 
@@ -47,7 +49,7 @@ module.exports =  async ()=>{
             user = await Client.createOrUpdate(body)
             delete user.password
 
-            var token = TokenUtils.sign(user.toJSON(), TOKEN.secret, 0)
+            var token = TokenUtils.sign({_id: user._id, email: user.email}, TOKEN.secret, 0)
             res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa, usuario creado!',
@@ -55,6 +57,8 @@ module.exports =  async ()=>{
                 token
             })
         } catch (e) {
+            console.log("ERROR CREANDO:", e)
+
             //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
@@ -66,7 +70,6 @@ module.exports =  async ()=>{
     async function update(req, res, next) {
         let body = req.body
         body._id = req.user._id
-
         try {
              await Client.createOrUpdate(body)
 

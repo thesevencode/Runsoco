@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon runsoco-socket/server.js"
+    "start": "nodemon runsoco-api/server.js"
   },
   "author": "bytecode S.A.C.",
   "license": "MIT",

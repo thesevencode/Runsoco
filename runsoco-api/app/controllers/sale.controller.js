@@ -12,20 +12,19 @@ const DB = require('../../db')
 
 module.exports =  async ()=>{
 
-    const { Sale, Receive } = await DB()
+    const { Sale, Receive, Client } = await DB()
 
 
     async function register(req, res, next) {
         let order = req.body
         order.state = []
         order.state.push({type: "receive"})
+        order.client = req.user._id
 
         let sale
         try{
-            
-
+        
             sale = await Receive.create(order)
-
             // //EMITIR EVENTOS
             socket.emit('new-sale', sale)
 
@@ -58,12 +57,17 @@ module.exports =  async ()=>{
         if(!order){
             return next(new APIError('El pedido no ha sido encontrado!', httpStatus.NOT_FOUND, true))
         }
-
+        let { points } = order.client
+        points+=1
         order.client = req.user._id
         order.state.push({type: "completed"})
+
         try{
             await Sale.create(order) //Agregamos los datos a la colección
-            await Receive.deleteById(order._id) // eliminamos
+            await Client.createOrUpdate({_id: req.user._id, points}) //actualizamos los puntos del cliente
+            await Receive.update(order) // actualizamos 
+
+            // await Receive.deleteById(order._id) // eliminamos
 
             // EMITIMOS AL ADMINISTRADOR QUE EL PEDIDO HA SIDO CONFIRMADO
             socket.emit('sale-confirmation', order)
@@ -74,7 +78,6 @@ module.exports =  async ()=>{
             })
 
         } catch (e) {
-            console.log("ERRROR CREANDO:", e)
             //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
@@ -141,8 +144,6 @@ module.exports =  async ()=>{
             data: lista
         })
     }
-
-
 
     async function postReceiveAccept(req, res, next) {
         const  {sale} = req.body

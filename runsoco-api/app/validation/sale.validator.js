@@ -5,7 +5,7 @@ const {Joi} = require('express-validation')
 module.exports = {
     outstore : { 
         body : Joi.object({  
-           client: Joi.string().required(),
+           client: Joi.string(),
            description: Joi.string().required(),
            address: Joi.string().required(),
            payment: Joi.string().required(),
@@ -23,7 +23,7 @@ module.exports = {
     },
     instore : { 
         body : Joi.object({  
-           client: Joi.string().required(),
+           client: Joi.string(),
            business: Joi.string().required(),
            address: Joi.string().required(),
            payment: Joi.string().required(),

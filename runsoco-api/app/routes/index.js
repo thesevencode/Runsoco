@@ -26,7 +26,6 @@ module.exports = async (app) => {
 
 
     app.use((err, req, res, next) => {
-
         if (err instanceof ValidationError) {
             const error = new APIError('Los datos son invalidos!', err.statusCode, true);
             return next(error);

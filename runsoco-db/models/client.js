@@ -38,9 +38,8 @@ module.exports = async function setupClientModel (uri, config) {
       type: Number,
       required: false,
       unique: false,
-    }
-
-    // puntos: { type: Number }
+    },
+    points: { type: Number, required: true }
   }, { timestamps: true })
 
   return mongoose.model('Client', clientSchema)

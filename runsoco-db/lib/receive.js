@@ -29,7 +29,7 @@ module.exports = function (receiveModel) {
     return receiveModel.findById(_id)
             .populate({
               path: 'client',
-              select: 'tokenPush',
+              select: 'tokenPush points',
               populate: { path: 'user' }
             })
     
@@ -52,7 +52,7 @@ module.exports = function (receiveModel) {
 
   function findByEstadoReceive () {
     const cond = {
-      'state.type': { $nin: 'processing' }  // Options: $all, $nin, $in
+      'state.type': { $nin: 'processing completed' }  // Options: $all, $nin, $in
     }
     return receiveModel.find(cond)
             .populate({
@@ -66,7 +66,7 @@ module.exports = function (receiveModel) {
 
   function findByEstadoProcessing () {
     const cond = {
-      'state.type': { $all: ['receive', 'processing'] }  // Options: $all, $nin, $in
+      'state.type': { $all: ['receive', 'processing completed'] }  // Options: $all, $nin, $in
     }
     return receiveModel.find(cond)
             .populate({
