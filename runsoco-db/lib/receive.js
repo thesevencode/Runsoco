@@ -48,6 +48,13 @@ module.exports = function (receiveModel) {
       'state.type': { $nin: 'processing' }  // Options: $all, $nin, $in
     }
     return receiveModel.find(cond)
+            .populate({
+              path: 'client',
+              select: 'email city',
+              populate: { path: 'user' }
+            })
+            .populate('business', ['name', 'address', 'phones', 'type'])
+            .populate('products.product', ['name', 'description','price', 'category'])
   }
 
   function findByEstadoProcessing () {
@@ -55,6 +62,13 @@ module.exports = function (receiveModel) {
       'state.type': { $all: ['receive', 'processing'] }  // Options: $all, $nin, $in
     }
     return receiveModel.find(cond)
+            .populate({
+              path: 'client',
+              select: 'email city',
+              populate: { path: 'user' }
+            })
+            .populate('business', ['name', 'address', 'phones', 'type'])
+            .populate('products.product', ['name', 'description','price', 'category'])
   }
 
   function findByClient (_id) {
