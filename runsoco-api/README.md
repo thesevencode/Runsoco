@@ -129,7 +129,6 @@
 - }
 
 - body = {
-  -    client: String => ID del cliente,
   -    description: 'pedido nuevo',
   -    cellphone: 987876542,
   -    address: 'av. madre de dios',
@@ -157,7 +156,6 @@
 - }
 
 - body = {
-  - client: "5eb1fd1d121484411478875d", =>ID DEL CLIENTE
   - business: "5eb1fd1d121484411478875d",=>ID DE LA TIENDA
   - address: "Av. Sinchi Roca",
   - payment: "efectivo",
