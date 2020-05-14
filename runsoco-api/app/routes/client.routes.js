@@ -16,9 +16,8 @@ module.exports = async () => {
     const controller = await clientController()
 
     router
-        .get('/', (req, res) => {
-            res.send("hola mundo")
-        })
+        .get('/profile', auth(TOKEN), guard.check(['client:true']), controller.getProfile )
+        .get('/points', auth(TOKEN), guard.check(['client:true']), controller.getPoints )
         .post('/signIn', validate(clientValidation.signIn), controller.signIn)//registro de cliente
         .post('/notification', auth(TOKEN), guard.check(['client:true']), validate(clientValidation.notification), controller.update)//registro de token
 

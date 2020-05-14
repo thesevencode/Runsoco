@@ -5,6 +5,40 @@
 # Rutas
 
 
+## GET: Obtener El Perfil del cliente
+*localhost:3000/api/client/profile*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "",
+  - data: {} => datos del cliente
+- }
+
+## GET: Obtener los puntos del cliente
+*localhost:3000/api/client/points*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "",
+  - data: 12 => Cantidad de Puntos del cliente
+- }
+
 ## Registrar cliente
 *localhost:3000/api/client/signIn*
 

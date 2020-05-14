@@ -73,7 +73,7 @@ module.exports =  async ()=>{
         try {
              await Client.createOrUpdate(body)
 
-             res.status(200).json({
+            res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa, datos actualizados!',
             })
@@ -86,10 +86,47 @@ module.exports =  async ()=>{
     
     }
 
+    async function getProfile(req, res, next){
+        await getCLient(req, next, function(client){
+            res.status(200).json({
+                status: true,
+                message: 'Operacion exitosa, datos actualizados!',
+                data: client
+            })
+        })
+    }
 
+    async function getPoints(req, res, next){
+        await getCLient(req, next, function(client){
+            res.status(200).json({
+                status: true,
+                message: 'Operacion exitosa, datos actualizados!',
+                data: client.points
+            })
+        })
+    }
+
+    async function getCLient(req, next, callback){
+        const { _id } = req.user
+        let client
+        try{
+            client = await Client.findById(_id)
+        }catch(e){
+            const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+
+        if(!client){
+            return next(new APIError('Cliente no encontrado!', httpStatus.NOT_FOUND, true))
+        }
+        callback(client)
+        
+    }
     return {
         signIn,
-        update
+        update,
+        getProfile,
+        getPoints
     }
 
 }

@@ -52,7 +52,7 @@ module.exports = function (receiveModel) {
 
   function findByEstadoReceive () {
     const cond = {
-      'state.type': { $nin: 'processing completed' }  // Options: $all, $nin, $in
+      'state.type': { $nin: ['processing', 'completed']  }  // Options: $all, $nin, $in
     }
     return receiveModel.find(cond)
             .populate({
@@ -66,7 +66,7 @@ module.exports = function (receiveModel) {
 
   function findByEstadoProcessing () {
     const cond = {
-      'state.type': { $all: ['receive', 'processing completed'] }  // Options: $all, $nin, $in
+      'state.type': { $in:  'processing', $nin: 'completed' }  // Options: $all, $nin, $in
     }
     return receiveModel.find(cond)
             .populate({

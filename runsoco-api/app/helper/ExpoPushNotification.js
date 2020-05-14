@@ -19,7 +19,7 @@ class ExpoPushNotification{
 
     prepare(){
         let notifications = [];
-        for (let pushToken of tokens) {
+        for (let pushToken of this.tokens) {
 
             if (!Expo.isExpoPushToken(pushToken)) {
                 console.error(`Push token ${pushToken} is not a valid Expo push token`);
@@ -29,16 +29,16 @@ class ExpoPushNotification{
             notifications.push({
                 to: pushToken,
                 sound: "default",
-                title: title,
-                body: body,
-                data: { body }
+                title: this.mensaje.title,
+                body: this.mensaje.body,
+                data: { body: this.mensaje.body}
             })
         }
-        chunks = expo.chunkPushNotifications(notifications);
+        this.chunks = expo.chunkPushNotifications(notifications);
     }
 
     async send(){
-        for (let chunk of chunks) {
+        for (let chunk of this.chunks) {
             try {
               let receipts = await expo.sendPushNotificationsAsync(chunk);
               console.log(receipts)
