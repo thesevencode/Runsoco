@@ -261,6 +261,25 @@
   - data: [] => arreglo de todos los negocios encontrados
 - }
 
+### POST:Canjear regalo
+*localhost:3000/api/gift/swap*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+- body = {
+  -    idGift: "" =>ID del Regalo,
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - code: "" => Codigo del cliente
+- }
 
 ##  NEGOCIOS
 

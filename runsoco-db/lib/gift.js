@@ -36,10 +36,20 @@ module.exports = function (giftModel) {
   function findForAdmin () {
     return giftModel.find()
   }
+  
 
+  function findById (_id) {
+    if (!ObjectId.isValid(_id)) {
+      return null
+    }
+    return giftModel.findById(_id)
+  }
+
+ 
   return {
     createOrUpdate,
     findForClient,
-    findForAdmin
+    findForAdmin,
+    findById
   }
 }

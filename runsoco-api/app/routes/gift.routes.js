@@ -17,6 +17,7 @@ module.exports = async () => {
 
     router
         .get('', auth(TOKEN), guard.check(['client:true']), controller.getClient)
+        .post('/swap', auth(TOKEN), guard.check(['client:true']), validate(giftValidation.postSwap), controller.postSwap)//canjear premio
         .post('/register', auth(TOKEN), guard.check(['admin:true']), controller.register)
 
 
