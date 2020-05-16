@@ -243,6 +243,24 @@
   -data: Objeto => Pedido actual
 - }
 
+##  REGALOS
+
+### GET:Obtener los regalos para el cliente
+*localhost:3000/api/gift*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - data: [] => arreglo de todos los negocios encontrados
+- }
+
 
 ##  NEGOCIOS
 

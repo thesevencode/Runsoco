@@ -6,6 +6,8 @@ const adminController = require('./admin.controller')
 const businessController = require('./business.controller')
 const productController = require('./product.controller')
 const saleController = require('./sale.controller')
+const giftController = require('./gift.controller')
+
 
 module.exports = () => {
     return {
@@ -14,6 +16,7 @@ module.exports = () => {
         adminController,
         businessController,
         productController,
-        saleController
+        saleController,
+        giftController
     }
 }

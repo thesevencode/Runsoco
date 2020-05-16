@@ -6,6 +6,8 @@ let adminRouter = require('./admin.routes')
 let businessRouter = require('./business.routes')
 let productRouter = require('./product.routes')
 let saleRouter = require('./sale.routes')
+let giftRouter = require('./gift.routes')
+
 
 
 const {  ValidationError } = require('express-validation')
@@ -22,6 +24,8 @@ module.exports = async (app) => {
     app.use('/api/business', await businessRouter())
     app.use('/api/product', await productRouter())
     app.use('/api/sale', await saleRouter() )
+    app.use('/api/gift', await giftRouter() )
+
 
 
 
