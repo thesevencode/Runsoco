@@ -9,7 +9,7 @@ const setupCurrierModel = require('./models/currier')
 const setupBusinessModel = require('./models/business')
 const setupProductModel = require('./models/product')
 const setupSaleModel = require('./models/sale')
-
+const setupGiftModel = require('./models/gift')
 
 const setupUser = require('./lib/user')
 const setupClient = require('./lib/client')
@@ -20,7 +20,7 @@ const setupAdmin = require('./lib/admin')
 const setupBusiness = require('./lib/business')
 const setupProduct = require('./lib/product')
 const setupSale = require('./lib/sale')
-
+const setupGift = require('./lib/gift')
 
 // Colecciones pajaseras
 const setupReceiveModel = require('./models/receive')
@@ -57,6 +57,8 @@ module.exports = async function (uri, config) {
   const BusinessModel = await setupBusinessModel(uri, config)
   const ProductModel = await setupProductModel(uri, config)
   const SaleModel = await setupSaleModel(uri, config)
+  const GiftModel = await setupGiftModel(uri, config)
+
 
   const ReceiveModel = await setupReceiveModel(uri, config)
 
@@ -67,6 +69,7 @@ module.exports = async function (uri, config) {
   const Business = setupBusiness(BusinessModel)
   const Product = setupProduct(ProductModel)
   const Sale = setupSale(SaleModel)
+  const Gift = setupGift(GiftModel)
   const Receive = setupReceive(ReceiveModel)
 
 
@@ -77,6 +80,7 @@ module.exports = async function (uri, config) {
     Business,
     Product,
     Sale,
+    Gift,
     Receive
   }
 }
