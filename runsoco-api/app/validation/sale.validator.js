@@ -21,6 +21,12 @@ module.exports = {
            sale: Joi.string().required()
         })
     },
+    postAccept : { 
+        body : Joi.object({  
+            idSale: Joi.string().required(),
+            idClient: Joi.string().required()
+        })
+    },
     instore : { 
         body : Joi.object({  
            client: Joi.string(),

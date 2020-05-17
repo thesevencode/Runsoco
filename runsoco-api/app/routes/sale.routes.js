@@ -28,8 +28,8 @@ module.exports = async () => {
         .get('/processing', auth(TOKEN), guard.check(['admin:true']), controller.getProcessing) //registro de todos los pedidos recibidos
         .get('/completed', auth(TOKEN), guard.check(['admin:true']), controller.getCompleted) //registro de todos los pedidos recibidos
 
-        .post('/receive/accept', auth(TOKEN), guard.check(['admin:true']), validate(saleValidation.postReceive), controller.postReceiveAccept) //registro de todos los pedidos recibidos
-        .post('/receive/refuse', auth(TOKEN), guard.check(['admin:true']), validate(saleValidation.postReceive),  controller.postReceiveRefuse) //registro de todos los pedidos recibidos
+        .post('/accept', auth(TOKEN), guard.check(['admin:true']), validate(saleValidation.postReceive), controller.postAccept) //registro de todos los pedidos recibidos
+        .post('/refuse', auth(TOKEN), guard.check(['admin:true']), validate(saleValidation.postAccept),  controller.postRefuse) //registro de todos los pedidos recibidos
 
     return router
 }

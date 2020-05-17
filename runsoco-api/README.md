@@ -423,13 +423,17 @@
 - }
 
 
-### Confirmar que el pedido esta en Proceso
-*localhost:3000/api/sale/processing/add/:idPedido*
+### POST: Aceptar pedido
+*localhost:3000/api/sale/accept*
 
 **Ejemplo**
 
 - header = {
   -    Authorization: "Bearer token",
+- }
+
+- body = {
+  -    sale: "" => ID del pedido,
 - }
 
 
@@ -439,3 +443,26 @@
   - status: true/false,
   - message: "mensaje configurado por respuesta",
 - }
+
+### POST: Rechazar pedido
+*localhost:3000/api/sale/refuse*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+- body = {
+  -    idSale: "" => ID del pedido,
+  -    idClient: "" => ID del cliente
+- }
+
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+- }
+

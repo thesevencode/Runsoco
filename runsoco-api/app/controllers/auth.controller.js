@@ -35,9 +35,7 @@ module.exports = async () => {
             //comparar contraseñas
             if(bcrypt.compareSync(client.password, account.user.password)) {
 
-                const payload = account.toJSON()
-                delete payload.user.password
-                var token = TokenUtils.sign(payload, TOKEN.secret, 0)
+                var token = TokenUtils.sign({_id: account._id, email: account.email}, TOKEN.secret, 0)
 
                 delete payload.permissions
                 return res.status(200).json({
@@ -76,7 +74,7 @@ module.exports = async () => {
                     client.shareCode = generator.generate()
 
                     let result = await Client.createOrUpdate(client)        
-                    var token = TokenUtils.sign(result.toJSON(), TOKEN.secret, 0)
+                    var token = TokenUtils.sign({_id: result._id, email: result.email}, TOKEN.secret, 0)
 
                     delete result.user.permissions                    
                     return res.status(200).json({

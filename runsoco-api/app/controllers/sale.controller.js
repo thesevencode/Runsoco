@@ -163,7 +163,7 @@ module.exports =  async ()=>{
         })
     }
 
-    async function postReceiveAccept(req, res, next) {
+    async function postAccept(req, res, next) {
         const  {sale} = req.body
         let order = await findById(Receive, sale, next)
         order.state.push({ type: "processing" })
@@ -189,23 +189,18 @@ module.exports =  async ()=>{
 
     }
 
-    async function postReceiveRefuse(req, res, next) {
-        const  {sale} = req.body
-        let order = await findById(Receive, sale, next)
-
-        console.log("Order:", order)
-
-        order.state.push({ type: "processing" })
+    async function postRefuse(req, res, next) {
+        const  {idSale, idClient} = req.body
+        let client = await findById(Client, idClient, next)
         try{
-            await Receive.update(order)
+            await Receive.deleteById(idSale)
 
-            if(order.client.tokenPush){
+            if(client.tokenPush){
                  //Enviar Notificación al usuario
-                const notification = new ExpoPushNotification([order.client.tokenPush], {title: 'Runsoco', body: 'Tu pedido esta en camino!'})
+                const notification = new ExpoPushNotification([client.tokenPush], {title: 'Runsoco', body: 'Lo sentimos su pedido no ha podido ser procesado!'})
                 await notification.send()
             }
-
-        
+            
             res.status(200).json({
                 status: true,
                 message: 'Operacion exitosa!'
@@ -243,8 +238,8 @@ module.exports =  async ()=>{
         getReceive,
         getProcessing,
         getCompleted,
-        postReceiveAccept,
-        postReceiveRefuse
+        postAccept,
+        postRefuse
     }
 
 }
