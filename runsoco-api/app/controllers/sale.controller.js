@@ -58,10 +58,11 @@ module.exports =  async ()=>{
             return next(new APIError('El pedido no ha sido encontrado!', httpStatus.NOT_FOUND, true))
         }
         let { points } = order.client
+        let orderLast = order.toJSON()
         points+=1
         order.client = req.user._id
         order.state.push({type: "completed"})
-
+        delete order._id
         try{
             await Sale.create(order) //Agregamos los datos a la colección
             await Client.createOrUpdate({_id: req.user._id, points}) //actualizamos los puntos del cliente
@@ -70,7 +71,7 @@ module.exports =  async ()=>{
             // await Receive.deleteById(order._id) // eliminamos
 
             // EMITIMOS AL ADMINISTRADOR QUE EL PEDIDO HA SIDO CONFIRMADO
-            socket.emit('sale-confirmation', order)
+            socket.emit('sale-confirmation', orderLast)
 
             res.status(200).json({
                 status: true,
