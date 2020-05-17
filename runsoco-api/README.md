@@ -369,7 +369,7 @@
 ## PEDIDOS
 
 ### Obtener pedidos RECIBIDOS
-*localhost:3000/api/sale/receive/list*
+*localhost:3000/api/sale/receive*
 
 **Ejemplo**
 
@@ -387,7 +387,25 @@
 - }
 
 ### Obtener pedidos EN PROCESO
-*localhost:3000/api/sale/processing/list*
+*localhost:3000/api/sale/processing*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+
+
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false,
+  - message: "mensaje configurado por respuesta",
+  - data: [] => Arreglo
+- }
+
+### Obtener pedidos COMPLETADOS
+*localhost:3000/api/sale/completed*
 
 **Ejemplo**
 

@@ -78,6 +78,19 @@ module.exports = function (receiveModel) {
             .populate('products.product', ['name', 'description','price', 'category'])
   }
 
+  function findByEstadoCompleted () {
+    const cond = {
+      'state.type': { $in:  'completed' }  // Options: $all, $nin, $in
+    }
+    return receiveModel.find(cond)
+            .populate({
+              path: 'client',
+              select: 'email city',
+              populate: { path: 'user' }
+            })
+            .populate('business', ['name', 'address', 'phones', 'type'])
+  }
+
   function findByClient (_id) {
     if (!ObjectId.isValid(_id)) {
       return null
@@ -107,6 +120,7 @@ module.exports = function (receiveModel) {
     //ADMINISTRADOR
     findByIdForAdmin,
     findByEstadoReceive,
+    findByEstadoCompleted,
     findByEstadoProcessing,
     deleteById
   }

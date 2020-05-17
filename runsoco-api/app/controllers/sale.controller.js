@@ -87,7 +87,7 @@ module.exports =  async ()=>{
 
     }
 
-    async function getReceiveList(req, res, next) {
+    async function getReceive(req, res, next) {
         let lista
         try{
             
@@ -107,12 +107,30 @@ module.exports =  async ()=>{
 
     }
 
-    async function getProcessingList(req, res, next) {
+    async function getProcessing(req, res, next) {
         let lista
         try{
             lista = await Receive.findByEstadoProcessing()
         } catch (e) {
             console.log(e)
+            //ERROR de la base de datos
+            const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+
+        res.status(200).json({
+            status: true,
+            message: 'Operacion exitosa!',
+            data: lista
+        })
+
+    }
+
+    async function getCompleted(req, res, next) {
+        let lista
+        try{
+            lista = await Receive.findByEstadoCompleted()
+        } catch (e) {
             //ERROR de la base de datos
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
@@ -222,8 +240,9 @@ module.exports =  async ()=>{
         register,
         getSaleByClient,
         confirmation,
-        getReceiveList,
-        getProcessingList,
+        getReceive,
+        getProcessing,
+        getCompleted,
         postReceiveAccept,
         postReceiveRefuse
     }
