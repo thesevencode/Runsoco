@@ -96,7 +96,8 @@ module.exports = function (receiveModel) {
       return null
     }
     const cond = {
-      client: _id
+      client: _id,
+      'state.type': { $nin: 'completed' }
     }
     return receiveModel.findOne(cond)
             .populate('business', ['name', 'address', 'phones', 'type'])
