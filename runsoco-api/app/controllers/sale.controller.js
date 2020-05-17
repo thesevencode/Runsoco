@@ -68,6 +68,7 @@ module.exports =  async ()=>{
         try{
             newOrder = await Sale.create(order) //Agregamos los datos a la colección
             await Client.createOrUpdate({_id: req.user._id, points}) //actualizamos los puntos del cliente
+            order._id = _id
             await Receive.update(order) // actualizamos 
 
             // await Receive.deleteById(order._id) // eliminamos
