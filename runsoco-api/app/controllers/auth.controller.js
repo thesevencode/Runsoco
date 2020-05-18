@@ -34,12 +34,12 @@ module.exports = async () => {
 
             //comparar contraseñas
             if(bcrypt.compareSync(client.password, account.user.password)) {
-
                 var token = TokenUtils.sign({_id: account._id, email: account.email}, TOKEN.secret, 0)
 
                 return res.status(200).json({
                     token, 
                     status:true, 
+                    data: account,
                     message: 'Inicio de sesión exitoso!' 
                 })
             } 
