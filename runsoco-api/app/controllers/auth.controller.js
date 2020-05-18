@@ -37,11 +37,9 @@ module.exports = async () => {
 
                 var token = TokenUtils.sign({_id: account._id, email: account.email}, TOKEN.secret, 0)
 
-                delete payload.permissions
                 return res.status(200).json({
                     token, 
                     status:true, 
-                    data: payload,
                     message: 'Inicio de sesión exitoso!' 
                 })
             } 
