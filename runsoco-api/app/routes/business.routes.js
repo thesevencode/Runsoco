@@ -14,10 +14,9 @@ module.exports = async () => {
     const controller = await businessController()
 
     router
-        .get('/', (req, res) => {
-            res.send("hola mundo")
-        })
         .get('/:type', auth(TOKEN), guard.check(['client:true']), controller.searchByType) //buscando negocios por tipo
+        .get('/only/names', auth(TOKEN), guard.check(['admin:true']), controller.getNames) //buscando negocios por tipo
+
 
     return router
 }

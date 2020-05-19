@@ -38,10 +38,15 @@ module.exports = function (businessModel) {
     return businessModel.find(cond)
   }
 
+  function findAllOnlyName () {
+    return businessModel.find().select('_id name businessName')
+  }
+
   return {
     create, // implementado
     update, // implementado
     findById, // implementado
-    findByType // implementado
+    findByType, // implementado
+    findAllOnlyName
   }
 }

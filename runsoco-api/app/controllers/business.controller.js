@@ -30,9 +30,26 @@ module.exports =  async ()=>{
         
     }
 
+    async function getNames(req, res, next){
+        let business
+        try{
+            business = await Business.findAllOnlyName()
+        }catch(e){
+            //ERROR de la base de datos
+            const err = new APIError('Algo salio mal, intentlo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+        res.status(200).json({
+            status: true,
+            message: 'Operacion exitosa!',
+            data: business
+        })
+    }
+
 
     return {
-        searchByType
+        searchByType,
+        getNames
     }
 
 }
