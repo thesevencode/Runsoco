@@ -58,7 +58,7 @@ module.exports =  async ()=>{
 
     async function postSwap(req, res, next){
         //Buscamos el regalo
-        const { idGift } = req.body
+        const { idGift, cellphone, address } = req.body
         let gift =  await utils.findById(Gift, idGift, next)
         //Verificamos si aun esta disponible
         if(gift.quantity == 0){
@@ -85,7 +85,7 @@ module.exports =  async ()=>{
         //Registramos premio
         try{
             gift.quantity = gift.quantity - 1
-            gift.awarded.push({client : client._id, code})
+            gift.awarded.push({client : client._id, code, cellphone, address})
             await Gift.createOrUpdate(gift)
         }catch(e){
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)

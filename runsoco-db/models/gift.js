@@ -32,6 +32,12 @@ module.exports = async function setupUserModel (uri, config) {
             type: Mongoose.Schema.ObjectId,
             ref: 'Client'
         },
+        cellphone: {
+            type: String
+        },
+        address: {
+            type: String
+        },
         code: {
             type: String,
             required: true
