@@ -153,6 +153,21 @@
 ##  PEDIDOS
 
 
+### GET:Verificar si el cliente tiene un pedido actual
+*localhost:3000/api/sale/verification*
+
+**Ejemplo**
+
+- header = {
+  -    Authorization: "Bearer token",
+- }
+**La peticion retorna el siguiente formato**
+
+- {
+  - status: true/false, => true: no tiene ningun pedido
+  - message: "mensaje configurado por respuesta",
+- }
+
 ### Realizar pedido fuera del stock de los productos que ofrecemos
 *localhost:3000/api/sale/outstore*
 
@@ -272,6 +287,8 @@
 
 - body = {
   -    idGift: "" =>ID del Regalo,
+  -    cellphone: 98765232,
+  -    address: "asdasd"
 - }
 **La peticion retorna el siguiente formato**
 

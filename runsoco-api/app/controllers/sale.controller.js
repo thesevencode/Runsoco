@@ -218,6 +218,27 @@ module.exports =  async ()=>{
 
     }
 
+    async function verification(req, res, next) {
+        const { _id } = req.user
+        let lista
+        try{
+            lista = await Receive.findByClient(_id)
+        }catch(e){
+            const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
+            return next(err)
+        }
+
+        if(lista){
+            return next(new APIError('El usuario cuenta con un pedido actual', httpStatus.UNAUTHORIZED, true))
+        }
+
+        res.status(200).json({
+            status: true,
+            message: 'No cuenta con un pedido actual!'
+        })
+
+    }
+
 
     async function findById(ModelDB, id, next){
         let result
@@ -244,7 +265,8 @@ module.exports =  async ()=>{
         getProcessing,
         getCompleted,
         postAccept,
-        postRefuse
+        postRefuse,
+        verification
     }
 
 }
