@@ -1,6 +1,7 @@
 'use strict'
 
 const httpStatus = require('http-status')
+const IncomingForm = require('formidable').IncomingForm
 
 const APIError = require('../helper/APIError')
 const ExpoPushNotification = require('../helper/ExpoPushNotification');
@@ -12,6 +13,8 @@ const { HashidsUtils } =  require('../../utils')
 const socket = require('../../socket')()
 
 const DB = require('../../db')
+
+const URLDirectory = './public';
 
 module.exports =  async ()=>{
 
@@ -101,10 +104,60 @@ module.exports =  async ()=>{
 
     }
 
+    function upload(req, res, next){
+        const { _id } = req.params
+        console.log("UPLOAD: ", _id)
+
+
+        var form = new IncomingForm();
+        form.uploadDir = URLDirectory
+        form.multiples = true
+        console.log("Imagen:")
+
+        form.once('error', console.error)
+
+        form.on('fileBegin', function (name, file){
+            console.log("PREPARANDO IMAGEN")
+
+            //Modificamos el nombre
+            // const [fileName, fileExt] = file.name.split('.');
+            // logourl =  crypto.encryptHash(_id + fileName + DateUtil.getDate()) + '.'+fileExt;
+            // file.path = URLDirectory + "/" + logourl;
+
+        });
+
+        form.on('file', (field, file) => {
+            // Do something with the file
+            // e.g. save it to the database
+            // you can access it using file.path
+            console.log("evento file");
+        })
+        form.on('end', async () => {
+            console.log("IMAGEN GUARDADA")
+            // try{
+            //    await  Agency.updateLogo(id, logourl);
+            //     res.send({message: "Logo registrado correctamente"});
+            // }catch(e){
+            //     return next(new Error('Server Failed Ocurrió un problema, intentelo de nuevo mas tarde'));
+            // }
+
+        })
+        form.on('aborted', function() {
+            console.log("Abortado")
+        })
+        form.parse(req, (err, fields, files) => {
+            // console.log('fields:', fields);
+            console.log('ERROR:', err);
+
+            console.log('files:', files);
+        });    
+    }
+
     return {
         getClient,
         register,
-        postSwap
+        postSwap,
+        upload
     }
 
 }

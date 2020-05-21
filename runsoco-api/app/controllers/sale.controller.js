@@ -229,7 +229,11 @@ module.exports =  async ()=>{
         }
 
         if(lista){
-            return next(new APIError('El usuario cuenta con un pedido actual', httpStatus.UNAUTHORIZED, true))
+            res.status(200).json({
+                status: false,
+                message: 'El usuario cuenta con un pedido actual!'
+            })
+            // return next(new APIError('El usuario cuenta con un pedido actual', httpStatus.UNAUTHORIZED, true))
         }
 
         res.status(200).json({

@@ -20,12 +20,14 @@ const port = process.env.PORT || 3000
 const app = express()
 const server = http.createServer(app)
 
+app.use(cors())
 
-app.use('/public', express.static(__dirname + '/public'))
-app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('combined'))
 
+app.use(express.static('./public'))
 
 
 // // CORS
@@ -35,7 +37,6 @@ app.use(morgan('combined'))
 //     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
 //     next();
 // })
-app.use(cors())
 
 
 blacklist.configure({
