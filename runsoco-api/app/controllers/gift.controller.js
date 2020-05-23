@@ -8,13 +8,13 @@ const ExpoPushNotification = require('../helper/ExpoPushNotification');
 //UTILS CONTROLLER
 const utils = require('../utils/index')()
 //UTILS 
-const { HashidsUtils } =  require('../../utils')
+const { HashidsUtils, CryptoUtils, DateUtils } =  require('../../utils')
 
 const socket = require('../../socket')()
 
 const DB = require('../../db')
 
-const URLDirectory = './public';
+const URLDirectory = './public/gifts';
 
 module.exports =  async ()=>{
 
@@ -106,13 +106,12 @@ module.exports =  async ()=>{
 
     function upload(req, res, next){
         const { _id } = req.params
-        console.log("UPLOAD: ", _id)
 
 
         var form = new IncomingForm();
         form.uploadDir = URLDirectory
         form.multiples = true
-        console.log("Imagen:")
+        console.log("Imagen:", req.files)
 
         form.once('error', console.error)
 
@@ -120,9 +119,9 @@ module.exports =  async ()=>{
             console.log("PREPARANDO IMAGEN")
 
             //Modificamos el nombre
-            // const [fileName, fileExt] = file.name.split('.');
-            // logourl =  crypto.encryptHash(_id + fileName + DateUtil.getDate()) + '.'+fileExt;
-            // file.path = URLDirectory + "/" + logourl;
+            const [fileName, fileExt] = file.name.split('.');
+            const generateSrc =  CryptoUtils.encryptHash(_id + fileName + DateUtils.getDate()) + '.'+fileExt;
+            file.path = URLDirectory + "/" + generateSrc;
 
         });
 
@@ -149,7 +148,11 @@ module.exports =  async ()=>{
             // console.log('fields:', fields);
             console.log('ERROR:', err);
 
-            console.log('files:', files);
+            console.log('FILEDS:', fields);
+            console.log('Files', files)
+            // for (const file of Object.entries(files)) {
+            //     console.log(file)
+            // }
         });    
     }
 

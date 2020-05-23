@@ -153,18 +153,23 @@ module.exports =  async ()=>{
     async function getSaleByClient(req, res, next){
 
         const {_id } = req.user
-        let lista
+        let sale
         try{
-            lista = await Receive.findByClient(_id)
+            sale = await Receive.findByClient(_id)
         }catch(e){
             const err = new APIError('Algo salio mal, intentelo de nuevo mas tarde!', httpStatus.INTERNAL_SERVER_ERROR, true)
             return next(err)
         }
 
+        if(sale){
+            sale.state[0] = sale.state[1]? sale.state[1] : sale.state[0]
+            sale.state[1] = null
+        }
+
         res.status(200).json({
             status: true,
             message: 'Operacion exitosa!',
-            data: lista
+            data: sale
         })
     }
 
@@ -233,6 +238,7 @@ module.exports =  async ()=>{
                 status: false,
                 message: 'El usuario cuenta con un pedido actual!'
             })
+            return
             // return next(new APIError('El usuario cuenta con un pedido actual', httpStatus.UNAUTHORIZED, true))
         }
 

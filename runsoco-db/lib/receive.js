@@ -101,7 +101,7 @@ module.exports = function (receiveModel) {
     }
     return receiveModel.findOne(cond)
             .populate('business', ['name', 'address', 'phones', 'type'])
-            .populate('products.product', ['name', 'description','price', 'category'])
+            .populate('products.product', ['name', 'description','price', 'category', 'img'])
   
   }
 
